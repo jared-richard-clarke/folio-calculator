@@ -1,0 +1,105 @@
+:root {
+  font-size: calc(12px + 0.25vw);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+.base {
+  background-color: rgb(248, 250, 252);
+}
+.calc {
+  --button-bg-primary: #6b7280;
+  --button-bg-primary-hover: #4b5563;
+  --button-bg-primary-active: #1f2937;
+  --button-txt-primary: #fff;
+  --button-bg-secondary: #fbbf24;
+  --button-bg-secondary-hover: #f59e0b;
+  --button-bg-secondary-active: #d97706;
+  --button-txt-secondary: #000;
+  --outline-focus: solid 2px #000;
+  --border-radius: 0.45rem;
+  --box-shadow-bottom: 0 1px 3px rgba(0, 0, 0, 0.12),
+    0 1px 2px rgba(0, 0, 0, 0.24);
+  font-family: "IBM Plex Sans", "Helvetica Neue", Helvetica, Arial,
+    "Open Sans", sans-serif;
+  ;
+  font-size: 1.15rem;
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.calc__output {
+  font-size: 1.5rem;
+  font-weight: 500;
+  padding: 1rem 0.5rem 0;
+  border: solid 3px rgb(156, 163, 175);
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
+  background-color: #fff;
+  overflow-wrap: break-word;
+}
+
+.calc__grid {
+  --calc-total-columns: 4;
+  --calc-gap: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(var(--calc-total-columns), minmax(0, 1fr));
+  gap: var(--calc-gap);
+}
+
+.calc__grid-columns-1 {
+  grid-column: span 1;
+}
+
+.calc__grid-columns-2 {
+  grid-column: span 2;
+}
+
+.calc__grid-columns-3 {
+  grid-column: span 3;
+}
+
+.calc__grid-columns-4 {
+  grid-column: span 4;
+}
+
+.calc__button {
+  font-weight: 600;
+  color: var(--button-txt-primary);
+  background-color: var(--button-bg-primary);
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border: none;
+  border-radius: 0.125rem;
+  box-shadow: var(--box-shadow-bottom);
+  cursor: pointer;
+}
+
+.calc__button:hover {
+  background-color: var(--button-bg-primary-hover);
+}
+
+.calc__button:active {
+  background-color: var(--button-bg-primary-active);
+}
+
+.calc__button:focus {
+  outline: var(--outline-focus);
+}
+
+.calc__button--secondary {
+  color: var(--button-txt-secondary);
+  background-color: var(--button-bg-secondary);
+}
+
+.calc__button--secondary:hover {
+  background-color: var(--button-bg-secondary-hover);
+}
+
+.calc__button--secondary:active {
+  background-color: var(--button-bg-secondary-active);
+}
