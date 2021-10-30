@@ -238,6 +238,7 @@
             delete_char,
         });
     })();
+    // === module constants ===
     const constants = Object.freeze({
         DEFAULT_ZERO: "0",
         ZERO_ERROR: "Cannot divide by zero.",
