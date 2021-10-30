@@ -1,5 +1,6 @@
 (function () {
     // === CALCULATOR: modules ===
+    // === module compute ===
     const compute = (function () {
         function tokenize(text) {
             return text.split(" ").map((token) => {
@@ -181,7 +182,7 @@
             evaluate,
         });
     })();
-    // === utils module ===
+    // === module utils ===
     const utils = (function () {
         const negate_num_char = (function () {
             const NUM_CHAR = /-?(\d+|\d+\.\d+)$/;
@@ -243,6 +244,7 @@
         PAREN_ERROR: "Mismatched parentheses.",
         OVERFLOW_ERROR: "Number outside safe range.",
     });
+    // === module regex === 
     const regex = (function () {
         // regular expressions
         const DEFAULT_ZERO = new RegExp("^" + constants.DEFAULT_ZERO + "$");
