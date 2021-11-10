@@ -105,33 +105,31 @@
         const evaluate = (function () {
             // operations
             const operations = (function () {
-                function adder(x, y) {
+                function add(x, y) {
                     return x + y;
                 }
-                function subtractor(x, y) {
+                function subtract(x, y) {
                     return x - y;
                 }
-                function multiplier(x, y) {
+                function multiply(x, y) {
                     return x * y;
                 }
-                function divider(x, y) {
+                function divide(x, y) {
                     return x / y;
                 }
-                function exponenter(x, y) {
+                function exponent(x, y) {
                     return x ** y;
                 }
-                // decorators
-                function fix_point(operation, digits) {
-                    return function (x, y) {
-                        return Number(operation(x, y).toFixed(digits));
-                    };
+                function fix_point(sum) {
+                    return Number(sum.toFixed(7));
                 }
                 return Object.freeze({
-                    add: fix_point(adder, 7),
-                    subtract: fix_point(subtractor, 7),
-                    multiply: fix_point(multiplier, 7),
-                    divide: fix_point(divider, 7),
-                    exponent: fix_point(exponenter, 7),
+                    add,
+                    subtract,
+                    multiply,
+                    divide,
+                    exponent,
+                    fix_point,
                 });
             })();
 
@@ -172,7 +170,7 @@
                         }
                     }
                 });
-                return stack.pop();
+                return operations.fix_point(stack.pop());
             }
             return evaluator;
         })();
