@@ -1,6 +1,6 @@
 (function () {
-    // === CALCULATOR: modules ===
-    // === module compute ===
+    // === Calculator ===
+    // === modules ===
     const compute = (function () {
         function tokenize(text) {
             return text.split(" ").map((token) => {
@@ -121,7 +121,8 @@
                     return x ** y;
                 }
                 function fix_point(sum) {
-                    return Number(sum.toFixed(7));
+                    const DECIMAL_PRECISION = 15;
+                    return Number(sum.toFixed(DECIMAL_PRECISION));
                 }
                 return Object.freeze({
                     add,
@@ -180,7 +181,6 @@
             evaluate,
         });
     })();
-    // === module utils ===
     const utils = (function () {
         const negate_num_char = (function () {
             const NUM_CHAR = /-?(\d+|\d+\.\d+)$/;
@@ -236,15 +236,14 @@
             delete_char,
         });
     })();
-    // === module constants ===
-    const constants = Object.freeze({
-        DEFAULT_ZERO: "0",
-        ZERO_ERROR: "Cannot divide by zero.",
-        PAREN_ERROR: "Mismatched parentheses.",
-        OVERFLOW_ERROR: "Number outside safe range.",
-    });
-    // === module regex === 
+
     const regex = (function () {
+        const constants = Object.freeze({
+            DEFAULT_ZERO: "0",
+            ZERO_ERROR: "Cannot divide by zero.",
+            PAREN_ERROR: "Mismatched parentheses.",
+            OVERFLOW_ERROR: "Number outside safe range.",
+        });
         // regular expressions
         const DEFAULT_ZERO = new RegExp("^" + constants.DEFAULT_ZERO + "$");
         const ZERO_ERROR = new RegExp("^" + constants.ZERO_ERROR + "$");
@@ -268,6 +267,7 @@
         }
         // interface
         return Object.freeze({
+            constants,
             is_trailing_operator: check_text(TRAILING_OPERATOR),
             is_open_paren: check_text(OPEN_PARENTHESIS),
             is_default_zero: check_text(DEFAULT_ZERO),
@@ -312,8 +312,9 @@
             or,
         });
     })();
-    // === end of modules ===
-    // === CALCULATOR: variables ===
+    // === modules-end ===
+
+    // map keys to presentational values.
     const OPERATOR_MAP = Object.freeze({
         "+": utils.pad("+"),
         "-": utils.pad("-"),
@@ -334,13 +335,13 @@
         decimal: ["."],
         equals: ["="],
     });
-    // === CALCULATOR: control flow ===
+    // conditional functions
     const { and, or } = conditionals;
     const logic = {
         controls: function (text, key) {
             switch (key) {
                 case "clear":
-                    output.textContent = constants.DEFAULT_ZERO;
+                    output.textContent = regex.constants.DEFAULT_ZERO;
                     return;
                 case "delete":
                     if (regex.is_default_zero(text)) {
@@ -353,7 +354,7 @@
                             regex.is_overflow_error(text)
                         )
                     ) {
-                        output.textContent = constants.DEFAULT_ZERO;
+                        output.textContent = regex.constants.DEFAULT_ZERO;
                         return;
                     } else {
                         output.textContent = utils.delete_char(text);
@@ -438,19 +439,19 @@
             ) {
                 return;
             } else if (regex.is_divide_by_zero(text)) {
-                output.textContent = constants.ZERO_ERROR;
+                output.textContent = regex.constants.ZERO_ERROR;
                 return;
             } else {
                 const parsed = compute.parse(
                     compute.tokenize(utils.insert_imp(text))
                 );
                 if (parsed === null) {
-                    output.textContent = constants.PAREN_ERROR;
+                    output.textContent = regex.constants.PAREN_ERROR;
                     return;
                 } else {
                     const result = compute.evaluate(parsed);
                     if (utils.unsafe_number(result)) {
-                        output.textContent = constants.OVERFLOW_ERROR;
+                        output.textContent = regex.constants.OVERFLOW_ERROR;
                         return;
                     } else {
                         output.textContent = String(result);
@@ -459,8 +460,9 @@
             }
         },
     };
-    // === CALCULATOR: components ===
+    // === CALCULATOR ===
     const calculator = document.querySelector("[data-calculator]");
+    // === CALCULATOR: components ===
     // | ----------- mutate this data structure -----------|
     const output = calculator.querySelector("[data-output]");
     // | --------------------------------------------------|
