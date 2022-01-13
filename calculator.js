@@ -1,14 +1,26 @@
+// === Calculator Program ===
 (function () {
-    // === Calculator ===
-    // === modules ===
+    
+    // const compute = readonly {
+    //   1. tokenize(string) -> [string, number]
+    //      Break string into array of operators as strings and operands as numbers.
+    //
+    //   2. parse([string, number]) -> [string, number] or null if mismatched parentheses
+    //      Transform infix to postfix. Check for mismatched parenthesis.
+    //
+    //   3. evaluate([string, number]) -> number
+    //      Process postfix. Return sum.
+    // }
+    // purpose: "compute" acts as module, providing functions that evaluate arithmetic expressions.
     const compute = (function () {
+        // 1. function tokenize
         function tokenize(text) {
             return text.split(" ").map((token) => {
                 return /\d+/.test(token) ? Number(token) : token;
             });
         }
+        // 2. function parse
         const parse = (function () {
-            // constants
             const parenthesis = {
                 open: "(",
                 close: ")",
@@ -39,8 +51,7 @@
             function empty(stack) {
                 return stack.length === 0;
             }
-            // parse([ numbers and strings ]) -> [ numbers and strings ] or null
-            // Transform infix to postfix. Check for mismatched parenthesis.
+
             function parser(infix) {
                 // variables
                 const output_stack = [];
@@ -102,8 +113,8 @@
             }
             return parser;
         })();
+        // 3. function evaluate
         const evaluate = (function () {
-            // operations
             const operations = (function () {
                 function add(x, y) {
                     return x + y;
@@ -133,9 +144,6 @@
                     fix_point,
                 });
             })();
-
-            // evaluate([ numbers | strings ]) -> number
-            // Process postfix. Return sum.
             function evaluator(postfix) {
                 const stack = [];
                 let operand1 = 0;
@@ -181,7 +189,29 @@
             evaluate,
         });
     })();
+    
+    // const utils = readonly {
+    //   1. negate_num_char(string) -> string
+    //      Flip sign of numerical string.
+    //
+    //   2. unsafe_number(number) -> boolean
+    //      Determines whether number is within JavaScript's safe numerical range.
+    //
+    //   3. pad(string) -> string
+    //      Add whitespace character to start and end of string.
+    //
+    //   4. insert_imp(string) -> string
+    //      Insert implied multiplication symbol into arithmetic expression prior to evaluation.
+    // 
+    //   5. replace_end(string) -> string
+    //      Replaces number 0 with number 1-9 if 0 follows operator. Prevents malformed expressions like 1 ÷ 05.
+    //
+    //   6. delete_char(string) -> string
+    //      Deletes character at end of string.
+    // }
+    // purpose: "utils" acts as module, providing utility functions for string and number manipulation.
     const utils = (function () {
+        // 1. function negate_num_char
         const negate_num_char = (function () {
             const NUM_CHAR = /-?(\d+|\d+\.\d+)$/;
             function negate(num_text) {
@@ -196,12 +226,15 @@
                 });
             };
         })();
+        // 2. function unsafe_number
         function unsafe_number(number) {
             return Math.abs(number) >= Number.MAX_SAFE_INTEGER;
         }
+        // 3. function pad
         function pad(text) {
             return " " + text + " ";
         }
+        // 4. function insert_imp
         const insert_imp = (function () {
             const IMPLIED_MULTIPLIER = pad("imp-×");
             function insert(regex) {
@@ -219,11 +252,12 @@
                 return after(between(before(text)));
             };
         })();
+        // 5. function replace_end
         function replace_end(text, char) {
             const substring = text.substring(0, text.length - 1);
             return substring + char;
         }
-        // "(", ")", "^", "×", "÷", "+", "-",
+        // 6. function delete_char
         function delete_char(text) {
             return text.replace(/\s[()]\s$|\s[×^÷+-]\s$|\.$|\-?\d$/, "");
         }
@@ -236,6 +270,45 @@
             delete_char,
         });
     })();
+    
+    // const regex = readonly {
+    //   1. is_trailing_operator(string) -> boolean
+    //      Is there a trailing operator?
+    //
+    //   2. is_open_paren(string) -> boolean
+    //      Is their an open parenthesis at end of string?
+    //
+    //   3. is_default_zero(string) -> boolean
+    //      Is the expression "0"?
+    //
+    //   4. is_trailing_zero(string) -> boolean
+    //      Is number 0 at end of string?
+    // 
+    //   5. is_decimal(string) -> boolean
+    //      Does number have decimal point?
+    //
+    //   6. is_trailing_decimal(string) -> boolean
+    //      Does expression have a trailing decimal point?
+    //
+    //   7. is_trailing_digit(string) -> boolean
+    //      Does expression end with number?
+    //
+    //   8. is_divide_by_zero(string) -> boolean
+    //      Does expression have divide-by-zero errors?
+    //
+    //   9. is_paren_error(string) -> boolean
+    //      Is expression the PAREN_ERROR constant?
+    //
+    //  10. is_zero_error(string) -> boolean
+    //      Is expression ZERO_ERROR constant?
+    //
+    //  11. is_overflow_error(string) -> boolean
+    //      Is expression OVERFLOW_ERROR constant?
+    //
+    //  12. is_single_char(string) -> boolean
+    //      Is expression one character?
+    // }
+    // purpose: "regex" acts as module, providing regular-expression functions for monitoring calculator input.
 
     const regex = (function () {
         const constants = Object.freeze({
@@ -282,6 +355,14 @@
             is_single_char,
         });
     })();
+    // const conditionals = readonly {
+    //   1. and(...expressions) -> boolean
+    //      If any expression evaluates false, stop evaluation and return false.
+    //
+    //   2. or(...expressions) -> boolean
+    //      If any expression evaluates true, stop evaluation and return true.
+    // }
+    // purpose: "conditionals" acts as module, providing functional replacements for && and || operators.
     const conditionals = (function () {
         const edge_cases = new Map([
             [0, true],
@@ -294,25 +375,21 @@
             [undefined, false],
             [null, false],
         ]);
-        // and(...expressions) -> boolean
         function and(...expressions) {
             return expressions.every((value) => {
                 return edge_cases.has(value) ? edge_cases.get(value) : value;
             });
         }
-        // or(...expressions) -> boolean
         function or(...expressions) {
             return expressions.some((value) => {
                 return edge_cases.has(value) ? edge_cases.get(value) : value;
             });
         }
-        // interface: const { and, or } = conditionals;
         return Object.freeze({
             and,
             or,
         });
     })();
-    // === modules-end ===
 
     // map keys to presentational values.
     const OPERATOR_MAP = Object.freeze({
@@ -488,4 +565,47 @@
             logic.equals(text);
         }
     });
+})();
+
+(function () {
+    // === PARALLAX ANIMATION ===
+    const parallax = document.querySelector("#parallax");
+    const parallax_images = [
+        document.querySelector(".parallax__mountain"),
+        document.querySelector(".parallax__hills-bg"),
+        document.querySelector(".parallax__hills-fg"),
+        document.querySelector(".parallax__trees"),
+    ];
+    const parallax_button = document.querySelector(".parallax__button");
+    // Event toggles animation by adding or removing
+    // .parallax__toggle { animation-play-state: running; }.
+    parallax_button.addEventListener("click", function () {
+        const aria_pressed = parallax_button.getAttribute("aria-pressed");
+        if (aria_pressed === "true") {
+            parallax_button.setAttribute("aria-pressed", false);
+        } else {
+            parallax_button.setAttribute("aria-pressed", true);
+        }
+        parallax_images.forEach((image) => {
+            image.classList.toggle("parallax__toggle");
+        });
+    });
+
+    // If user forgets to pause animation, an intersection observer
+    // will pause it for them when they scroll to the next section.
+    if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver((entry) => {
+            const aria_pressed = parallax_button.getAttribute("aria-pressed");
+            if (
+                !entry.isIntersecting &&
+                aria_pressed === "true"
+            ) {
+                parallax_button.setAttribute("aria-pressed", false);
+                parallax_images.forEach((image) => {
+                    image.classList.remove("parallax__toggle");
+                });
+            }
+        });
+        observer.observe(parallax);
+    }
 })();
