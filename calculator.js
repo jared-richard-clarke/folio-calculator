@@ -12,6 +12,7 @@
     //      Process postfix. Return sum.
     // }
     // purpose: "compute" acts as module, providing functions that evaluate arithmetic expressions.
+    
     const compute = (function () {
         // 1. function tokenize
         function tokenize(text) {
@@ -210,6 +211,7 @@
     //      Deletes character at end of string.
     // }
     // purpose: "utils" acts as module, providing utility functions for string and number manipulation.
+    
     const utils = (function () {
         // 1. function negate_num_char
         const negate_num_char = (function () {
@@ -355,6 +357,7 @@
             is_single_char,
         });
     })();
+    
     // const conditionals = readonly {
     //   1. and(...expressions) -> boolean
     //      If any expression evaluates false, stop evaluation and return false.
@@ -363,6 +366,7 @@
     //      If any expression evaluates true, stop evaluation and return true.
     // }
     // purpose: "conditionals" acts as module, providing functional replacements for && and || operators.
+    
     const conditionals = (function () {
         const edge_cases = new Map([
             [0, true],
