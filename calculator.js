@@ -1,18 +1,18 @@
 // === Calculator Program ===
 (function () {
     
-    // const compute = readonly {
-    //   1. tokenize(string) -> [string, number]
-    //      Break string into array of operators as strings and operands as numbers.
-    //
-    //   2. parse([string, number]) -> [string, number] or null if mismatched parentheses
-    //      Transform infix to postfix. Check for mismatched parenthesis.
-    //
-    //   3. evaluate([string, number]) -> number
-    //      Process postfix. Return sum.
-    // }
-    // purpose: "compute" acts as module, providing functions that evaluate arithmetic expressions.
+    /* const compute = readonly {
+       1. tokenize(string) -> [string, number]
+          Break string into array of operators as strings and operands as numbers.
     
+       2. parse([string, number]) -> [string, number] or null if mismatched parentheses
+          Transform infix to postfix. Check for mismatched parenthesis.
+    
+       3. evaluate([string, number]) -> number
+          Process postfix. Return sum.
+    }
+    purpose: "compute" acts as module, providing functions that evaluate arithmetic expressions. */
+
     const compute = (function () {
         // 1. function tokenize
         function tokenize(text) {
@@ -190,28 +190,28 @@
             evaluate,
         });
     })();
+
+    /* const utils = readonly {
+       1. negate_num_char(string) -> string
+          Flip sign of numerical string.
     
-    // const utils = readonly {
-    //   1. negate_num_char(string) -> string
-    //      Flip sign of numerical string.
-    //
-    //   2. unsafe_number(number) -> boolean
-    //      Determines whether number is within JavaScript's safe numerical range.
-    //
-    //   3. pad(string) -> string
-    //      Add whitespace character to start and end of string.
-    //
-    //   4. insert_imp(string) -> string
-    //      Insert implied multiplication symbol into arithmetic expression prior to evaluation.
-    // 
-    //   5. replace_end(string) -> string
-    //      Replaces number 0 with number 1-9 if 0 follows operator. Prevents malformed expressions like 1 ÷ 05.
-    //
-    //   6. delete_char(string) -> string
-    //      Deletes character at end of string.
-    // }
-    // purpose: "utils" acts as module, providing utility functions for string and number manipulation.
+       2. unsafe_number(number) -> boolean
+          Determines whether number is within JavaScript's safe numerical range.
     
+       3. pad(string) -> string
+          Add whitespace character to start and end of string.
+    
+       4. insert_imp(string) -> string
+          Insert implied multiplication symbol into arithmetic expression prior to evaluation.
+     
+       5. replace_end(string) -> string
+          Replaces number 0 with number 1-9 if 0 follows operator. Prevents malformed expressions like 1 ÷ 05.
+    
+       6. delete_char(string) -> string
+          Deletes character at end of string.
+     }
+     purpose: "utils" acts as module, providing utility functions for string and number manipulation. */
+
     const utils = (function () {
         // 1. function negate_num_char
         const negate_num_char = (function () {
@@ -272,45 +272,45 @@
             delete_char,
         });
     })();
+
+    /* const regex = readonly {
+       1. is_trailing_operator(string) -> boolean
+          Is there a trailing operator?
     
-    // const regex = readonly {
-    //   1. is_trailing_operator(string) -> boolean
-    //      Is there a trailing operator?
-    //
-    //   2. is_open_paren(string) -> boolean
-    //      Is their an open parenthesis at end of string?
-    //
-    //   3. is_default_zero(string) -> boolean
-    //      Is the expression "0"?
-    //
-    //   4. is_trailing_zero(string) -> boolean
-    //      Is number 0 at end of string?
-    // 
-    //   5. is_decimal(string) -> boolean
-    //      Does number have decimal point?
-    //
-    //   6. is_trailing_decimal(string) -> boolean
-    //      Does expression have a trailing decimal point?
-    //
-    //   7. is_trailing_digit(string) -> boolean
-    //      Does expression end with number?
-    //
-    //   8. is_divide_by_zero(string) -> boolean
-    //      Does expression have divide-by-zero errors?
-    //
-    //   9. is_paren_error(string) -> boolean
-    //      Is expression the PAREN_ERROR constant?
-    //
-    //  10. is_zero_error(string) -> boolean
-    //      Is expression ZERO_ERROR constant?
-    //
-    //  11. is_overflow_error(string) -> boolean
-    //      Is expression OVERFLOW_ERROR constant?
-    //
-    //  12. is_single_char(string) -> boolean
-    //      Is expression one character?
-    // }
-    // purpose: "regex" acts as module, providing regular-expression functions for monitoring calculator input.
+       2. is_open_paren(string) -> boolean
+          Is their an open parenthesis at end of string?
+    
+       3. is_default_zero(string) -> boolean
+          Is the expression "0"?
+    
+       4. is_trailing_zero(string) -> boolean
+          Is number 0 at end of string?
+    
+       5. is_decimal(string) -> boolean
+          Does number have decimal point?
+    
+       6. is_trailing_decimal(string) -> boolean
+          Does expression have a trailing decimal point?
+    
+       7. is_trailing_digit(string) -> boolean
+          Does expression end with number?
+    
+       8. is_divide_by_zero(string) -> boolean
+          Does expression have divide-by-zero errors?
+    
+       9. is_paren_error(string) -> boolean
+          Is expression the PAREN_ERROR constant?
+    
+      10. is_zero_error(string) -> boolean
+          Is expression ZERO_ERROR constant?
+    
+      11. is_overflow_error(string) -> boolean
+          Is expression OVERFLOW_ERROR constant?
+    
+      12. is_single_char(string) -> boolean
+          Is expression one character?
+     }
+     purpose: "regex" acts as module, providing regular-expression functions for monitoring calculator input. */
 
     const regex = (function () {
         const constants = Object.freeze({
@@ -358,15 +358,15 @@
         });
     })();
     
-    // const conditionals = readonly {
-    //   1. and(...expressions) -> boolean
-    //      If any expression evaluates false, stop evaluation and return false.
-    //
-    //   2. or(...expressions) -> boolean
-    //      If any expression evaluates true, stop evaluation and return true.
-    // }
-    // purpose: "conditionals" acts as module, providing functional replacements for && and || operators.
+    /* const conditionals = readonly {
+       1. and(...expressions) -> boolean
+          If any expression evaluates false, stop evaluation and return false.
     
+       2. or(...expressions) -> boolean
+          If any expression evaluates true, stop evaluation and return true.
+     }
+     purpose: "conditionals" acts as module, providing functional replacements for && and || operators. */
+
     const conditionals = (function () {
         const edge_cases = new Map([
             [0, true],
@@ -600,10 +600,7 @@
     if ("IntersectionObserver" in window) {
         const observer = new IntersectionObserver((entry) => {
             const aria_pressed = parallax_button.getAttribute("aria-pressed");
-            if (
-                !entry.isIntersecting &&
-                aria_pressed === "true"
-            ) {
+            if (!entry.isIntersecting && aria_pressed === "true") {
                 parallax_button.setAttribute("aria-pressed", false);
                 parallax_images.forEach((image) => {
                     image.classList.remove("parallax__toggle");
