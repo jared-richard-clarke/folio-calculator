@@ -14,7 +14,7 @@ const EXP = "^";
 // ----------------
 const OPE = "(";
 const CLO = ")";
-
+// ----------------
 const OPERATORS = SUB + ADD + MUL + DIV + EXP; // "-+×÷^"
 
 export { ADD, SUB, MUL, IMP, LML, DIV, LDV, EXP, OPE, CLO, OPERATORS };
