@@ -80,16 +80,28 @@ function is_single_char(text) {
 }
 export default Object.freeze({
     constants,
+    // 1. function is_trailing_operator
     is_trailing_operator: check_text(TRAILING_OPERATOR),
+    // 2. function is_open_paren
     is_open_paren: check_text(OPEN_PARENTHESIS),
+    // 3. function is_default_zero
     is_default_zero: check_text(DEFAULT_ZERO),
+    // 4. function is_trailing_zero
     is_trailing_zero: check_text(TRAILING_ZERO),
+    // 5. function is_decimal
     is_decimal: check_text(DECIMAL),
+    // 6. function is_trailing_decimal
     is_trailing_decimal: check_text(TRAILING_DECIMAL),
+    // 7. function is_trailing_digit
     is_trailing_digit: check_text(TRAILING_DIGIT),
+    // 8. function is_divide_by_zero
     is_divide_by_zero: check_text(DIVIDE_BY_ZERO),
+    // 9. function is_paren_error
     is_paren_error: check_text(PAREN_ERROR),
+    // 10. function is_zero_error
     is_zero_error: check_text(ZERO_ERROR),
+    // 11. function is_overflow_error
     is_overflow_error: check_text(OVERFLOW_ERROR),
+    // 12. function is_single_char
     is_single_char,
 });
