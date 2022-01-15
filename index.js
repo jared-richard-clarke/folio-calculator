@@ -26,7 +26,30 @@ const LOOKUP = Object.freeze({
     decimal: ["."],
     equals: ["="],
 });
+
+// const logic = {
+//   1. controls(string, string) -> void
+//      Delegates for control logic: clear, delete, negate.
+//
+//   2. operators(string, string) -> void
+//      Delegates for operator logic: +, -, *, /, **.
+//
+//   3. operands(string, string) -> void
+//      Delegates for operand logic: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9.
+//
+//   4. parens(string, string) -> void
+//      Delegates for paren logic: (, ).
+//
+//   5. decimal(string, string) -> void
+//      Delegates for decimal logic: [ . ].
+//
+//   6. equals(string, string) -> void
+//      Delegates for equals logic: [ = ].
+// }
+// purpose: logic contains methods that delegate functionality based on user input.
+
 const logic = {
+    // 1. function controls
     controls: function (text, key) {
         switch (key) {
             case "clear":
@@ -58,6 +81,7 @@ const logic = {
                 }
         }
     },
+    // 2. function operators
     operators: function (text, key) {
         if (
             or(
@@ -73,6 +97,7 @@ const logic = {
             output.textContent += OPERATOR_MAP[key];
         }
     },
+    // 3. function operands
     operands: function (text, key) {
         if (
             or(
@@ -91,6 +116,7 @@ const logic = {
             output.textContent += key;
         }
     },
+    // 4. function parens
     parens: function (text, key) {
         if (
             and(
@@ -106,6 +132,7 @@ const logic = {
             output.textContent += PAREN_MAP[key];
         }
     },
+    // 5. function decimal
     decimal: function (text, key) {
         if (or(!regex.is_trailing_digit(text), regex.is_decimal(text))) {
             return;
@@ -113,6 +140,7 @@ const logic = {
             output.textContent += key;
         }
     },
+    // 6. function equals
     equals: function (text) {
         if (
             or(
