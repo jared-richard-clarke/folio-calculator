@@ -1,42 +1,55 @@
 import { DIV, OPERATORS } from "./symbols.js";
+
 // const regex = readonly {
 //   1. is_trailing_operator(string) -> boolean
 //      Is there a trailing operator?
+//      is_trailing_operator("1 + ") -> true
 //
 //   2. is_open_paren(string) -> boolean
 //      Is their an open parenthesis at end of string?
+//      is_open_paren("1 + 1 ( ") -> true
 //
 //   3. is_default_zero(string) -> boolean
 //      Is the expression "0"?
+//      is_default_zero("0") -> true
 //
 //   4. is_trailing_zero(string) -> boolean
 //      Is number 0 at end of string?
+//      is_trailing_zero("1 + 0") -> true
 //
 //   5. is_decimal(string) -> boolean
 //      Does number have decimal point?
+//      is_decimal("1.5") -> true
 //
 //   6. is_trailing_decimal(string) -> boolean
 //      Does expression have a trailing decimal point?
+//      is_trailing_decimal("1.") -> true
 //
 //   7. is_trailing_digit(string) -> boolean
 //      Does expression end with number?
+//      is_trailing_digit("1 + 1") -> true
 //
 //   8. is_divide_by_zero(string) -> boolean
 //      Does expression have divide-by-zero errors?
+//      is_divide_by_zero("1 ÷ 0") -> true
 //
 //   9. is_paren_error(string) -> boolean
 //      Is expression the PAREN_ERROR constant?
+//      is_paren_error(PAREN_ERROR) -> true
 //
 //  10. is_zero_error(string) -> boolean
 //      Is expression ZERO_ERROR constant?
+//      is_zero_error(ZERO_ERROR) -> true
 //
 //  11. is_overflow_error(string) -> boolean
 //      Is expression OVERFLOW_ERROR constant?
+//      is_overflow_error(OVERFLOW_ERROR) -> true
 //
 //  12. is_single_char(string) -> boolean
 //      Is expression one character?
+//      is_single_char("1") -> true
 // }
-// purpose: "regex" acts as module, providing regular-expression functions for monitoring calculator input.
+// purpose: "regex" acts as module, providing regular-expressions for examining calculator input.
 
 const constants = Object.freeze({
     DEFAULT_ZERO: "0",
@@ -65,7 +78,6 @@ function check_text(regex) {
 function is_single_char(text) {
     return /^-\d$/.test(text) || text.length === 1;
 }
-// interface
 export default Object.freeze({
     constants,
     is_trailing_operator: check_text(TRAILING_OPERATOR),
