@@ -1,15 +1,19 @@
 import { ADD, SUB, MUL, IMP, DIV, EXP, OPE, CLO } from "./symbols.js";
+
 // const compute = readonly {
 //   1. tokenize(string) -> [string, number]
-//      Break string into array of operators as strings and operands as numbers.
+//      Break string into array of operators(strings) and operands(numbers).
+//      tokenize("1 + 1") -> [ 1, "+", 1 ]
 //
 //   2. parse([string, number]) -> [string, number] or null if mismatched parentheses
-//      Transform infix to postfix. Check for mismatched parenthesis.
+//      Transform infix to postfix. Return null for mismatched parenthesis.
+//      parse([ 1, "+", 1 ]) -> [ 1, 1, "+" ] or parse([ "(", 1, "+", 1 ]) -> null
 //
 //   3. evaluate([string, number]) -> number
 //      Process postfix. Return sum.
+//      evaluate([ 1, 1, "+" ]) -> 2
 // }
-// purpose: "compute" module provides functions that evaluate arithmetic expressions.
+// purpose: Module "compute" provides functions that tokenize, parse, and evaluate arithmetic expressions.
 
 // 1. function tokenize
 function tokenize(text) {
@@ -23,8 +27,6 @@ const parse = (function () {
         open: OPE,
         close: CLO,
     };
-    // imp-×: implied multiplication,
-    // which has higher predence than explicit multiplication.
     const operators = [EXP, IMP, MUL, DIV, ADD, SUB];
     const precedence = {
         [EXP]: 4,
