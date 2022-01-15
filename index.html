@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- IBM Plex Sans: 400, 500 -->
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="calculator.css">
+  </head>
+
+  <body class="base">
+    <form class="calc" data-calculator>
+      <fieldset>
+        <legend>output</legend>
+        <div class="calc__output calc__grid" style="--calc-total-columns: 1;">
+          <output data-output>0</output>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>controls</legend>
+        <div class="calc__grid" style="--calc-total-columns: 3">
+          <button class="calc__button" aria-label="negate" value="negate" type="button">+/-</button>
+          <button class="calc__button" value="delete" type="button">delete</button>
+          <button class="calc__button" value="clear" type="button">clear</button>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>operators</legend>
+        <div class="calc__grid">
+          <button class="calc__button calc__button--secondary" value="+" type="button">+</button>
+          <button class="calc__button calc__button--secondary" value="-" type="button">−</button>
+          <button class="calc__button calc__button--secondary" value="*" type="button">×</button>
+          <button class="calc__button calc__button--secondary" value="/" type="button">÷</button>
+          <button class="calc__button calc__button--secondary" aria-label="exponent" value="^" type="button">^</button>
+          <button class="calc__grid-columns-3 calc__button calc__button--secondary" value="=" type="button">=</button>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>operands</legend>
+        <div class="calc__grid">
+          <button class="calc__button" value="1" type="button">1</button>
+          <button class="calc__button" value="2" type="button">2</button>
+          <button class="calc__button" value="3" type="button">3</button>
+          <button class="calc__button" value="4" type="button">4</button>
+          <button class="calc__button" value="5" type="button">5</button>
+          <button class="calc__button" value="6" type="button">6</button>
+          <button class="calc__button" value="7" type="button">7</button>
+          <button class="calc__button" value="8" type="button">8</button>
+          <button class="calc__button" value="9" type="button">9</button>
+          <button class="calc__button" value="0" type="button">0</button>
+          <button class="calc__grid-columns-2 calc__button" aria-label="decimal point" value="." type="button">.</button>
+          <button class="calc__grid-columns-2 calc__button" aria-label="left parenthesis" value="(" type="button">(</button>
+          <button class="calc__grid-columns-2 calc__button" aria-label="right parenthesis" value=")" type="button">)</button>
+        </div>
+      </fieldset>
+    </form>
+    <script type="module" src="./modules/symbols.js"></script>
+    <script type="module" src="./modules/compute.js"></script>
+    <script type="module" src="./modules/utils.js"></script>
+    <script type="module" src="./modules/regex.js"></script>
+    <script type="module" src="./modules/conditionals.js"></script>                                                                                                            
+    <script type="module" src="index.js"></script>
+  </body>
+
+</html>
