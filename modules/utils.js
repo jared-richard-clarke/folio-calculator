@@ -1,21 +1,27 @@
 // const utils = readonly {
 //   1. negate_num_char(string) -> string
 //      Flip sign of numerical string.
+//      negate_num_char("-1") -> "1" or negate_num_char("1") -> "-1"
 //
 //   2. unsafe_number(number) -> boolean
 //      Determines whether number is within JavaScript's safe numerical range.
+//      unsafe_number(Number.MAX_SAFE_INTEGER + 1) -> true
 //
 //   3. pad(string) -> string
 //      Add whitespace character to start and end of string.
+//      pad("+") -> " + "
 //
 //   4. insert_imp(string) -> string
 //      Insert implied multiplication symbol into arithmetic expression prior to evaluation.
+//      insert_imp("2 ( 2 )") -> "2 imp-× ( 2 )"
 //
-//   5. replace_end(string) -> string
+//   5. replace_end(string, string) -> string
 //      Replaces number 0 with number 1-9 if 0 follows operator. Prevents malformed expressions like 1 ÷ 05.
+//      replace_end("1 ÷ 0", "5") -> "1 ÷ 5"
 //
 //   6. delete_char(string) -> string
 //      Deletes character at end of string.
+//      delete_char("1 + 1") -> "1 + "
 // }
 // purpose: Module "utils" provides utility functions for string and number manipulation.
 
