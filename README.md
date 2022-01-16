@@ -15,4 +15,4 @@ I use these modules to manipulate my calculator input and output via an event li
 ## Github vs Portfolio Calculator
 There are some key differences between this calculator(*git-calc*) and my portfolio calculator(*folio-calc*):
 1. *git-calc* uses ESM modules to help with readability. *folio-calc* consolidates all JavaScript within a single file to both maintain compatibility with older browsers and reduce HTTP requests.
-2. *folio-calc* inherits a number of CSS declarations and properties only present in my portfolio. *git-calc* uses a handful of properties — width, padding, font-size — to compensate.
+2. *folio-calc* inherits CSS declarations and properties only present in my portfolio. *git-calc* uses a handful of properties — width, padding, font-size — to compensate.
