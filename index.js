@@ -46,9 +46,9 @@ const LOOKUP = Object.freeze({
 //   6. equals(string, string) -> void
 //      Delegates for equals logic: [ = ].
 // }
-// purpose: logic contains methods that delegate functionality based on user input.
+// purpose: delegate contains methods that choose functionality based on user input.
 
-const logic = {
+const delegate = {
     // 1. function controls
     controls: function (text, key) {
         switch (key) {
@@ -190,16 +190,16 @@ calculator.addEventListener("click", (event) => {
     if (key === undefined) {
         return;
     } else if (LOOKUP.controls.includes(key)) {
-        logic.controls(text, key);
+        delegate.controls(text, key);
     } else if (LOOKUP.operators.includes(key)) {
-        logic.operators(text, key);
+        delegate.operators(text, key);
     } else if (LOOKUP.operands.includes(key)) {
-        logic.operands(text, key);
+        delegate.operands(text, key);
     } else if (LOOKUP.parens.includes(key)) {
-        logic.parens(text, key);
+        delegate.parens(text, key);
     } else if (LOOKUP.decimal.includes(key)) {
-        logic.decimal(text, key);
+        delegate.decimal(text, key);
     } else if (LOOKUP.equals.includes(key)) {
-        logic.equals(text);
+        delegate.equals(text);
     }
 });
