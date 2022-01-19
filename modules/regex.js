@@ -1,4 +1,4 @@
-import { DIV, OPERATORS } from "./symbols.js";
+import { DIV, OPERATORS } from "./constants.js";
 
 // const regex = readonly {
 //   1. is_trailing_operator(string) -> boolean
