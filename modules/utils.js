@@ -42,7 +42,8 @@ function unsafe_number(number) {
 }
 // 3. function insert_imp
 const insert_imp = (function () {
-    const IMPLIED_MULTIPLIER = pad("imp-×");
+    // whitespace padding important    
+    const IMPLIED_MULTIPLIER = " imp-× ";
     function insert(regex) {
         return function (text) {
             return text.replace(regex, (match, p1, p2) => {
