@@ -42,7 +42,7 @@ function unsafe_number(number) {
 }
 // 3. function insert_imp
 const insert_imp = (function () {
-    // whitespace padding important    
+    // whitespace padding important.
     const IMPLIED_MULTIPLIER = " imp-× ";
     function insert(regex) {
         return function (text) {
