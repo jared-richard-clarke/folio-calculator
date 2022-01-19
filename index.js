@@ -27,7 +27,7 @@ const LOOKUP = Object.freeze({
     equals: ["="],
 });
 
-// const logic = {
+// const delegate = {
 //   1. controls(string, string) -> void
 //      Delegates for control logic: clear, delete, negate.
 //
