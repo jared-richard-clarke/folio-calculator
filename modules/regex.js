@@ -49,7 +49,7 @@ import { DIV, OPERATORS, DEFAULT_ZERO, ZERO_ERROR, PAREN_ERROR, OVERFLOW_ERROR }
 //      Is expression one character?
 //      is_single_char("1") -> true
 // }
-// purpose: "regex" acts as module, providing regular-expressions for examining calculator input.
+// purpose: module regex provides regular-expressions for examining calculator input.
 
 // regular expressions
 const DEF_ZERO = new RegExp("^" + DEFAULT_ZERO + "$");
@@ -98,3 +98,4 @@ export default Object.freeze({
     // 12. function is_single_char
     is_single_char,
 });
+
