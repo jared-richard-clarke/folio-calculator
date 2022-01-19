@@ -1,4 +1,4 @@
-import { DIV, OPERATORS } from "./constants.js";
+import { DIV, OPERATORS, DEFAULT_ZERO, ZERO_ERROR, PAREN_ERROR, OVERFLOW_ERROR } from "./constants.js";
 
 // const regex = readonly {
 //   1. is_trailing_operator(string) -> boolean
@@ -51,17 +51,11 @@ import { DIV, OPERATORS } from "./constants.js";
 // }
 // purpose: "regex" acts as module, providing regular-expressions for examining calculator input.
 
-const constants = Object.freeze({
-    DEFAULT_ZERO: "0",
-    ZERO_ERROR: "Cannot divide by zero.",
-    PAREN_ERROR: "Mismatched parentheses.",
-    OVERFLOW_ERROR: "Number outside safe range.",
-});
 // regular expressions
-const DEFAULT_ZERO = new RegExp("^" + constants.DEFAULT_ZERO + "$");
-const ZERO_ERROR = new RegExp("^" + constants.ZERO_ERROR + "$");
-const PAREN_ERROR = new RegExp("^" + constants.PAREN_ERROR + "$");
-const OVERFLOW_ERROR = new RegExp("^" + constants.OVERFLOW_ERROR + "$");
+const DEF_ZERO = new RegExp("^" + DEFAULT_ZERO + "$");
+const Z_ERROR = new RegExp("^" + ZERO_ERROR + "$");
+const P_ERROR = new RegExp("^" + PAREN_ERROR + "$");
+const O_ERROR = new RegExp("^" + OVERFLOW_ERROR + "$");
 const TRAILING_OPERATOR = new RegExp("[" + OPERATORS + "]\\s$"); // /[-+×÷^]\s$/;
 const OPEN_PARENTHESIS = /\s\(\s$/;
 const TRAILING_ZERO = new RegExp("[" + OPERATORS + "]\\s0$"); // /[-+×÷^]\s0$/;
@@ -69,7 +63,7 @@ const DECIMAL = /\d+\.\d+$/;
 const TRAILING_DECIMAL = /\d\.$/;
 const TRAILING_DIGIT = /\d$/;
 const DIVIDE_BY_ZERO = new RegExp("\\s" + DIV + "\\s0"); // /\s÷\s0/;
-// check_text(regex) -> function(text) -> boolean
+
 function check_text(regex) {
     return function (text) {
         return regex.test(text);
@@ -85,7 +79,7 @@ export default Object.freeze({
     // 2. function is_open_paren
     is_open_paren: check_text(OPEN_PARENTHESIS),
     // 3. function is_default_zero
-    is_default_zero: check_text(DEFAULT_ZERO),
+    is_default_zero: check_text(DEF_ZERO),
     // 4. function is_trailing_zero
     is_trailing_zero: check_text(TRAILING_ZERO),
     // 5. function is_decimal
@@ -97,11 +91,11 @@ export default Object.freeze({
     // 8. function is_divide_by_zero
     is_divide_by_zero: check_text(DIVIDE_BY_ZERO),
     // 9. function is_paren_error
-    is_paren_error: check_text(PAREN_ERROR),
+    is_paren_error: check_text(P_ERROR),
     // 10. function is_zero_error
-    is_zero_error: check_text(ZERO_ERROR),
+    is_zero_error: check_text(Z_ERROR),
     // 11. function is_overflow_error
-    is_overflow_error: check_text(OVERFLOW_ERROR),
+    is_overflow_error: check_text(O_ERROR),
     // 12. function is_single_char
     is_single_char,
 });
