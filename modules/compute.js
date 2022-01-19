@@ -1,4 +1,4 @@
-import { ADD, SUB, MUL, IMP, DIV, EXP, OPE, CLO } from "./symbols.js";
+import { ADD, SUB, MUL, IMP, DIV, EXP, OPE, CLO } from "./constants.js";
 
 // const compute = readonly {
 //   1. tokenize(string) -> [string, number]
