@@ -1,11 +1,11 @@
-import { ADD, SUB, MUL, IMP, DIV, EXP, OPE, CLO } from "./constants.js";
+import { ADD, SUB, MUL, IMP, DIV, EXP, OPE, CLO, PAREN_ERROR } from "./constants.js";
 
 // const compute = readonly {
 //   1. tokenize(string) -> [string, number]
 //      Break string into array of operators(strings) and operands(numbers).
 //      tokenize("1 + 1") -> [ 1, "+", 1 ]
 //
-//   2. parse([string, number]) -> [string, number] or null if mismatched parentheses
+//   2. parse([string, number]) -> [string, number] or PAREN_ERROR if mismatched parentheses
 //      Transform infix to postfix. Return null for mismatched parenthesis.
 //      parse([ 1, "+", 1 ]) -> [ 1, 1, "+" ] or parse([ "(", 1, "+", 1 ]) -> null
 //
@@ -106,7 +106,7 @@ const parse = (function () {
         // === Return Value ===
         // return postfix stack or null for mismatched parentheses
         if (mismatched_close_parens || mismatched_open_parens) {
-            return null;
+            return PAREN_ERROR;
         } else {
             return output_stack;
         }
