@@ -7,19 +7,15 @@
 //      Determines whether number is within JavaScript's safe numerical range.
 //      unsafe_number(Number.MAX_SAFE_INTEGER + 1) -> true
 //
-//   3. pad(string) -> string
-//      Add whitespace character to start and end of string.
-//      pad("+") -> " + "
-//
-//   4. insert_imp(string) -> string
+//   3. insert_imp(string) -> string
 //      Insert implied multiplication symbol into arithmetic expression prior to evaluation.
 //      insert_imp("2 ( 2 )") -> "2 imp-× ( 2 )"
 //
-//   5. replace_end(string, string) -> string
+//   4. replace_end(string, string) -> string
 //      Replaces number 0 with number 1-9 if 0 follows operator. Prevents malformed expressions like 1 ÷ 05.
 //      replace_end("1 ÷ 0", "5") -> "1 ÷ 5"
 //
-//   6. delete_char(string) -> string
+//   5. delete_char(string) -> string
 //      Deletes character at end of string.
 //      delete_char("1 + 1") -> "1 + "
 // }
@@ -44,11 +40,7 @@ const negate_num_char = (function () {
 function unsafe_number(number) {
     return Math.abs(number) >= Number.MAX_SAFE_INTEGER;
 }
-// 3. function pad
-function pad(text) {
-    return " " + text + " ";
-}
-// 4. function insert_imp
+// 3. function insert_imp
 const insert_imp = (function () {
     const IMPLIED_MULTIPLIER = pad("imp-×");
     function insert(regex) {
@@ -66,12 +58,12 @@ const insert_imp = (function () {
         return after(between(before(text)));
     };
 })();
-// 5. function replace_end
+// 4. function replace_end
 function replace_end(text, char) {
     const substring = text.substring(0, text.length - 1);
     return substring + char;
 }
-// 6. function delete_char
+// 5. function delete_char
 function delete_char(text) {
     return text.replace(/\s[()]\s$|\s[×^÷+-]\s$|\.$|\-?\d$/, "");
 }
@@ -79,7 +71,6 @@ function delete_char(text) {
 export default Object.freeze({
     negate_num_char,
     unsafe_number,
-    pad,
     insert_imp,
     replace_end,
     delete_char,
