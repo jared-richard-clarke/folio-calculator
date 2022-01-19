@@ -1,5 +1,5 @@
 // === Calculator Program ===
-import { OPE, CLO, DEFAULT_ZERO, OPERATOR_MAP, PAREN_MAP, LOOKUP } from "./modules/conditionals.js"
+import { OPE, CLO, DEFAULT_ZERO, OPERATOR_MAP, PAREN_MAP, LOOKUP } from "./modules/constants.js"
 import compute from "./modules/compute.js";
 import utils from "./modules/utils.js";
 import regex from "./modules/regex.js";
