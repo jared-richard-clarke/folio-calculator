@@ -73,7 +73,6 @@ function is_single_char(text) {
     return /^-\d$/.test(text) || text.length === 1;
 }
 export default Object.freeze({
-    constants,
     // 1. function is_trailing_operator
     is_trailing_operator: check_text(TRAILING_OPERATOR),
     // 2. function is_open_paren
