@@ -1,31 +1,9 @@
 // === Calculator Program ===
-import { ADD, SUB, MUL, IMP, LML, DIV, LDV, EXP, OPE, CLO } from "./modules/symbols.js"
+import { OPE, CLO, DEFAULT_ZERO, OPERATOR_MAP, PAREN_MAP, LOOKUP } from "./modules/conditionals.js"
 import compute from "./modules/compute.js";
 import utils from "./modules/utils.js";
 import regex from "./modules/regex.js";
 import { and, or } from "./modules/conditionals.js";
-
-// map keys to presentational values.
-const OPERATOR_MAP = Object.freeze({
-    [ADD]: utils.pad(ADD),
-    [SUB]: utils.pad(SUB),
-    [LML]: utils.pad(MUL),
-    [LDV]: utils.pad(DIV),
-    [EXP]: utils.pad(EXP),
-});
-const PAREN_MAP = Object.freeze({
-    [OPE]: utils.pad(OPE),
-    [CLO]: utils.pad(CLO),
-});
-// Added lookup table to avoid endless conditionals.
-const LOOKUP = Object.freeze({
-    controls: ["negate", "delete", "clear"],
-    operators: [ADD, SUB, LML, LDV, EXP],
-    operands: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
-    parens: [OPE, CLO],
-    decimal: ["."],
-    equals: ["="],
-});
 
 // const delegate = {
 //   1. controls(string, string) -> void
@@ -53,7 +31,7 @@ const delegate = {
     controls: function (text, key) {
         switch (key) {
             case "clear":
-                output.textContent = regex.constants.DEFAULT_ZERO;
+                output.textContent = DEFAULT_ZERO;
                 return;
             case "delete":
                 if (regex.is_default_zero(text)) {
@@ -66,7 +44,7 @@ const delegate = {
                         regex.is_overflow_error(text)
                     )
                 ) {
-                    output.textContent = regex.constants.DEFAULT_ZERO;
+                    output.textContent = DEFAULT_ZERO;
                     return;
                 } else {
                     output.textContent = utils.delete_char(text);
@@ -153,19 +131,19 @@ const delegate = {
         ) {
             return;
         } else if (regex.is_divide_by_zero(text)) {
-            output.textContent = regex.constants.ZERO_ERROR;
+            output.textContent = ZERO_ERROR;
             return;
         } else {
             const parsed = compute.parse(
                 compute.tokenize(utils.insert_imp(text))
             );
-            if (parsed === null) {
-                output.textContent = regex.constants.PAREN_ERROR;
+            if (parsed === PAREN_ERROR) {
+                output.textContent = PAREN_ERROR;
                 return;
             } else {
                 const result = compute.evaluate(parsed);
                 if (utils.unsafe_number(result)) {
-                    output.textContent = regex.constants.OVERFLOW_ERROR;
+                    output.textContent = OVERFLOW_ERROR;
                     return;
                 } else {
                     output.textContent = String(result);
