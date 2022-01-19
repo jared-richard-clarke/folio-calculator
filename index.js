@@ -161,9 +161,9 @@ const delegate = {
         }
     },
 };
-// === CALCULATOR ===
-const calculator = document.querySelector("[data-calculator]");
+
 // === CALCULATOR: components ===
+const calculator = document.querySelector("[data-calculator]");
 // | ----------- mutate this data structure -----------|
 const output = calculator.querySelector("[data-output]");
 // | --------------------------------------------------|
