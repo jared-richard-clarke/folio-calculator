@@ -65,6 +65,7 @@ function replace_end(text, char) {
 }
 // 5. function delete_char
 function delete_char(text) {
+    // use [×^÷+-] literals instead of OPERATORS constant. "new Regular expression" syntax overly complicated.
     return text.replace(/\s[()]\s$|\s[×^÷+-]\s$|\.$|\-?\d$/, "");
 }
 
