@@ -6,7 +6,7 @@ import { ADD, SUB, MUL, IMP, DIV, EXP, OPE, CLO, PAREN_ERROR } from "./constants
 //      tokenize("1 + 1") -> [ 1, "+", 1 ]
 //
 //   2. parse([string, number]) -> [string, number] or PAREN_ERROR if mismatched parentheses
-//      Transform infix to postfix. Return null for mismatched parenthesis.
+//      Transform infix to postfix. Return PAREN_ERROR for mismatched parenthesis.
 //      parse([ 1, "+", 1 ]) -> [ 1, 1, "+" ] or parse([ "(", 1, "+", 1 ]) -> null
 //
 //   3. evaluate([string, number]) -> number
