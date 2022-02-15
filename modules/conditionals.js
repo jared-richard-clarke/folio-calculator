@@ -32,7 +32,7 @@ function or(...expressions) {
         return edge_cases.has(value) ? edge_cases.get(value) : value;
     });
 }
-export {
+export default Object.freeze({
     and,
     or,
-};
+});
