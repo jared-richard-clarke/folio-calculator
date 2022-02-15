@@ -1,4 +1,6 @@
-import { ADD, SUB, MUL, IMP, DIV, EXP, OPE, CLO, PAREN_ERROR } from "./constants.js";
+import constants from "./constants.js";
+
+const { OPE, CLO, EXP, IMP, MUL, DIV, ADD, SUB, PAREN_ERROR } = constants;
 
 // const compute = readonly {
 //   1. tokenize(string) -> [string, number]
