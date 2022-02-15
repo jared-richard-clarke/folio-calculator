@@ -1,8 +1,11 @@
 import constants from "./constants.js";
+import compute from "./compute.js";
 import regex from "./regex.js";
 import utils from "./utils.js";
-import { and, or } from "./conditionals.js";
+import conditionals from "./conditionals.js";
 
+// destructure and/or functions from conditionals.
+const { and, or } = conditionals;
 // const delegate = readonly {
 //   1. controls(string, string, string) -> void
 //      Delegates for control events: clear, delete, negate.
@@ -102,10 +105,10 @@ const delegate = {
         ) {
             return;
         } else if (and(key === constants.OPE, regex.is_default_zero(text))) {
-            element.textContent = PAREN_MAP[key];
+            element.textContent = constants.PAREN_MAP[key];
             return;
         } else {
-            element.textContent += PAREN_MAP[key];
+            element.textContent += constants.PAREN_MAP[key];
         }
     },
     // 5. function decimal
