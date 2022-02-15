@@ -46,7 +46,7 @@ const LOOKUP = Object.freeze({
     equals: ["="],
 });
 
-export {
+export default Object.freeze({
     ADD,
     SUB,
     MUL,
@@ -65,4 +65,4 @@ export {
     OPERATOR_MAP,
     PAREN_MAP,
     LOOKUP,
-};
+});
