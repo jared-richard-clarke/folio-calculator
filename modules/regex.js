@@ -1,4 +1,4 @@
-import { DIV, OPERATORS, DEFAULT_ZERO, ZERO_ERROR, PAREN_ERROR, OVERFLOW_ERROR } from "./constants.js";
+import constants from "./constants.js";
 
 // const regex = readonly {
 //   1. is_trailing_operator(string) -> boolean
@@ -52,17 +52,17 @@ import { DIV, OPERATORS, DEFAULT_ZERO, ZERO_ERROR, PAREN_ERROR, OVERFLOW_ERROR }
 // purpose: module regex provides regular-expressions for examining calculator input.
 
 // regular expressions
-const DEF_ZERO = new RegExp("^" + DEFAULT_ZERO + "$");
-const Z_ERROR = new RegExp("^" + ZERO_ERROR + "$");
-const P_ERROR = new RegExp("^" + PAREN_ERROR + "$");
-const O_ERROR = new RegExp("^" + OVERFLOW_ERROR + "$");
-const TRAILING_OPERATOR = new RegExp("[" + OPERATORS + "]\\s$"); // /[-+×÷^]\s$/;
+const DEF_ZERO = new RegExp("^" + constants.DEFAULT_ZERO + "$");
+const ZERO_ERROR = new RegExp("^" + constants.ZERO_ERROR + "$");
+const PAREN_ERROR = new RegExp("^" + constants.PAREN_ERROR + "$");
+const OVERFLOW_ERROR = new RegExp("^" + constants.OVERFLOW_ERROR + "$");
+const TRAILING_OPERATOR = new RegExp("[" + constants.OPERATORS + "]\\s$"); // /[-+×÷^]\s$/;
 const OPEN_PARENTHESIS = /\s\(\s$/;
-const TRAILING_ZERO = new RegExp("[" + OPERATORS + "]\\s0$"); // /[-+×÷^]\s0$/;
+const TRAILING_ZERO = new RegExp("[" + constants.OPERATORS + "]\\s0$"); // /[-+×÷^]\s0$/;
 const DECIMAL = /\d+\.\d+$/;
 const TRAILING_DECIMAL = /\d\.$/;
 const TRAILING_DIGIT = /\d$/;
-const DIVIDE_BY_ZERO = new RegExp("\\s" + DIV + "\\s0"); // /\s÷\s0/;
+const DIVIDE_BY_ZERO = new RegExp("\\s" + constants.DIV + "\\s0"); // /\s÷\s0/;
 
 function check_text(regex) {
     return function (text) {
@@ -90,12 +90,11 @@ export default Object.freeze({
     // 8. function is_divide_by_zero
     is_divide_by_zero: check_text(DIVIDE_BY_ZERO),
     // 9. function is_paren_error
-    is_paren_error: check_text(P_ERROR),
+    is_paren_error: check_text(PAREN_ERROR),
     // 10. function is_zero_error
-    is_zero_error: check_text(Z_ERROR),
+    is_zero_error: check_text(ZERO_ERROR),
     // 11. function is_overflow_error
-    is_overflow_error: check_text(O_ERROR),
+    is_overflow_error: check_text(OVERFLOW_ERROR),
     // 12. function is_single_char
     is_single_char,
 });
-
