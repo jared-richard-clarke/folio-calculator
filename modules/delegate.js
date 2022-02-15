@@ -6,6 +6,7 @@ import conditionals from "./conditionals.js";
 
 // destructure and/or functions from conditionals.
 const { and, or } = conditionals;
+
 // const delegate = readonly {
 //   1. controls(string, string, string) -> void
 //      Delegates for control events: clear, delete, negate.
