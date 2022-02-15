@@ -1,5 +1,7 @@
-import { LOOKUP } from "./modules/constants.js";
+import constants from "./modules/constants.js";
 import delegate from "./modules/delegate.js"
+
+const { LOOKUP } = constants;
 
 // === CALCULATOR: components ===
 const calculator = document.querySelector("[data-calculator]");
