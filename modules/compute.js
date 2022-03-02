@@ -156,26 +156,25 @@ const evaluate = (function () {
             } else {
                 operand2 = stack.pop();
                 operand1 = stack.pop();
-                switch (token) {
-                    case ADD:
-                        return stack.push(operations.add(operand1, operand2));
-                    case SUB:
-                        return stack.push(
-                            operations.subtract(operand1, operand2)
-                        );
-                    case MUL:
-                    case IMP:
-                        return stack.push(
-                            operations.multiply(operand1, operand2)
-                        );
-                    case DIV:
-                        return stack.push(
-                            operations.divide(operand1, operand2)
-                        );
-                    case EXP:
-                        return stack.push(
-                            operations.exponent(operand1, operand2)
-                        );
+                if (token === ADD) {
+                    stack.push(operations.add(operand1, operand2));
+                    return;
+                }
+                if (token === SUB) {
+                    stack.push(operations.subtract(operand1, operand2));
+                    return;
+                }
+                if (token === MUL || token === IMP) {
+                    stack.push(operations.multiply(operand1, operand2));
+                    return;
+                }
+                if (token === DIV) {
+                    stack.push(operations.divide(operand1, operand2));
+                    return;
+                }
+                if (token === EXP) {
+                    stack.push(operations.exponent(operand1, operand2));
+                    return;
                 }
             }
         });
