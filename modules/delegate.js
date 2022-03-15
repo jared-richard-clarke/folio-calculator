@@ -127,8 +127,7 @@ const delegate = {
                 regex.is_paren_error(text),
                 regex.is_zero_error(text),
                 regex.is_overflow_error(text),
-                regex.is_trailing_operator(text),
-                regex.is_trailing_decimal(text)
+                regex.is_trailing_operator(text)
             )
         ) {
             return;
