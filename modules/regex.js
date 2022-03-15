@@ -62,7 +62,8 @@ const TRAILING_ZERO = new RegExp("[" + constants.OPERATORS + "]\\s0$"); // /[-+�
 const DECIMAL = /\d+\.\d+$/;
 const TRAILING_DECIMAL = /\d\.$/;
 const TRAILING_DIGIT = /\d$/;
-const DIVIDE_BY_ZERO = new RegExp("\\s" + DIV + "\\s0\\s|\\s" + DIV + "\\s0$"); // \s÷\s0\s|\s÷\s0$;
+// Use literal regular expression. "new Regular expression" syntax overly complicated.
+const DIVIDE_BY_ZERO = /\s÷\s0\.?\s|\s÷\s0\.?$/;
 
 function check_text(regex) {
     return function (text) {
