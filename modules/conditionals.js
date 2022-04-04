@@ -9,7 +9,7 @@
 // }
 // purpose: Module "conditionals" provides functional replacements for && and || operators.
 
-const edge_cases = new Map([
+const lookup = new Map([
     [0, true],
     [-0, false],
     [Number.POSITIVE_INFINITY, false],
@@ -23,13 +23,13 @@ const edge_cases = new Map([
 // 1. function and
 function and(...expressions) {
     return expressions.every((value) => {
-        return edge_cases.has(value) ? edge_cases.get(value) : value;
+        return lookup.has(value) ? lookup.get(value) : value;
     });
 }
 // 2. function or
 function or(...expressions) {
     return expressions.some((value) => {
-        return edge_cases.has(value) ? edge_cases.get(value) : value;
+        return lookup.has(value) ? lookup.get(value) : value;
     });
 }
 export default Object.freeze({
