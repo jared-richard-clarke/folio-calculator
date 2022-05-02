@@ -7,9 +7,9 @@ const { OPE, CLO, EXP, IMP, MUL, DIV, ADD, SUB, PAREN_ERROR } = constants;
 //      Break string into array of operators(strings) and operands(numbers).
 //      tokenize("1 + 1") -> [ 1, "+", 1 ]
 //
-//   2. parse([string, number]) -> [string, number] or PAREN_ERROR if mismatched parentheses
+//   2. parse([string, number]) -> [string, number] or PAREN_ERROR
 //      Transform infix to postfix. Return PAREN_ERROR for mismatched parenthesis.
-//      parse([ 1, "+", 1 ]) -> [ 1, 1, "+" ] or parse([ "(", 1, "+", 1 ]) -> null
+//      parse([ 1, "+", 1 ]) -> [ 1, 1, "+" ] or parse([ "(", 1, "+", 1 ]) -> PAREN_ERROR
 //
 //   3. evaluate([string, number]) -> number
 //      Process postfix. Return sum.
