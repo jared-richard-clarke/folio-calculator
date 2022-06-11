@@ -2,10 +2,10 @@ import constants from "./constants.js";
 import compute from "./compute.js";
 import regex from "./regex.js";
 import utils from "./utils.js";
-import conditionals from "./conditionals.js";
+import cond from "./cond.js";
 
 // destructure and/or functions from conditionals.
-const { and, or } = conditionals;
+const { and, or } = cond;
 
 // const delegate = readonly {
 //   1. controls(string, string, string) -> void
