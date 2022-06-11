@@ -147,7 +147,9 @@ const delegate = {
                     element.textContent = constants.OVERFLOW_ERROR;
                     return;
                 } else {
-                    element.textContent = String(result);
+                    element.textContent = String(
+                        utils.fix_point(result)
+                    );
                 }
             }
         }
