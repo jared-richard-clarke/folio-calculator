@@ -133,17 +133,12 @@ const evaluate = (function () {
         function exponent(x, y) {
             return x ** y;
         }
-        function fix_point(sum) {
-            const DECIMAL_PRECISION = 15;
-            return Number(sum.toFixed(DECIMAL_PRECISION));
-        }
         return Object.freeze({
             add,
             subtract,
             multiply,
             divide,
             exponent,
-            fix_point,
         });
     })();
     function evaluator(postfix) {
@@ -178,7 +173,7 @@ const evaluate = (function () {
                 }
             }
         });
-        return operations.fix_point(stack.pop());
+        return stack.pop();
     }
     return evaluator;
 })();
