@@ -7,15 +7,19 @@
 //      Determines whether number is within JavaScript's safe numerical range.
 //      unsafe_number(Number.MAX_SAFE_INTEGER + 1) -> true
 //
-//   3. insert_imp(string) -> string
+//   3. fix_point(number) -> number
+//      Rounds number to within 15 decimal points of precision.
+//      fix_point(0.19999999999999998) -> 0.2
+//
+//   4. insert_imp(string) -> string
 //      Insert implied multiplication symbol into arithmetic expression prior to evaluation.
 //      insert_imp("2 ( 2 )") -> "2 imp-× ( 2 )"
 //
-//   4. replace_end(string, string) -> string
+//   5. replace_end(string, string) -> string
 //      Replaces number 0 with number 1-9 if 0 follows operator. Prevents malformed expressions like 1 ÷ 05.
 //      replace_end("1 ÷ 0", "5") -> "1 ÷ 5"
 //
-//   5. delete_char(string) -> string
+//   6. delete_char(string) -> string
 //      Deletes character at end of string.
 //      delete_char("1 + 1") -> "1 + "
 // }
@@ -40,7 +44,12 @@ const negate_num_char = (function () {
 function unsafe_number(number) {
     return Math.abs(number) >= Number.MAX_SAFE_INTEGER;
 }
-// 3. function insert_imp
+// 3. function fix_point
+function fix_point(sum) {
+    const DECIMAL_PRECISION = 15;
+    return Number(sum.toFixed(DECIMAL_PRECISION));
+}
+// 4. function insert_imp
 const insert_imp = (function () {
     // whitespace padding important.
     const IMPLIED_MULTIPLIER = " imp-× ";
@@ -59,12 +68,12 @@ const insert_imp = (function () {
         return after(between(before(text)));
     };
 })();
-// 4. function replace_end
+// 5. function replace_end
 function replace_end(text, char) {
     const substring = text.substring(0, text.length - 1);
     return substring + char;
 }
-// 5. function delete_char
+// 6. function delete_char
 function delete_char(text) {
     // use [×^÷+-] literals instead of OPERATORS constant. "new Regular expression" syntax overly complicated.
     return text.replace(/\s[()]\s$|\s[×^÷+-]\s$|\.$|\-?\d$/, "");
@@ -73,6 +82,7 @@ function delete_char(text) {
 export default Object.freeze({
     negate_num_char,
     unsafe_number,
+    fix_point,
     insert_imp,
     replace_end,
     delete_char,
