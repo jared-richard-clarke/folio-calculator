@@ -45,13 +45,9 @@ import constants from "./constants.js";
 //      Is expression OVERFLOW_ERROR constant?
 //      is_overflow_error(OVERFLOW_ERROR) -> true
 //
-//  12. is_trailing_e(string) -> boolean
-//      Does expression end with "e", debris from exponent notation?
-//      is_trailing_e("4e") -> true
-//
-//  13. is_single_char(string) -> boolean
-//      Is expression one character?
-//      is_single_char("1") -> true
+//  13. is_single_number(string) -> boolean
+//      Is expression single number?
+//      is_single_num("1.02") -> true
 // }
 // purpose: module regex provides regular-expressions for examining calculator input.
 
@@ -68,15 +64,14 @@ const TRAILING_DECIMAL = /\d\.$/;
 const TRAILING_DIGIT = /\d$/;
 // Use literal regular expression. "new Regular expression" syntax overly complicated.
 const DIVIDE_BY_ZERO = /\s÷\s0\.?\s|\s÷\s0\.?$/;
-const TRAILING_E = /e$/;
 
 function check_text(regex) {
     return function (text) {
         return regex.test(text);
     };
 }
-function is_single_char(text) {
-    return /^-\d$/.test(text) || text.length === 1;
+function is_single_number(text) {
+    return /^\-?\d+(?:\.\d+)?(?:[eE][+\-]?\d+)?$/.test(text);
 }
 export default Object.freeze({
     // 1. function is_trailing_operator
@@ -101,8 +96,6 @@ export default Object.freeze({
     is_zero_error: check_text(ZERO_ERROR),
     // 11. function is_overflow_error
     is_overflow_error: check_text(OVERFLOW_ERROR),
-    // 12. function is_trailing_e
-    is_trailing_e: check_text(TRAILING_E),
-    // 13. function is_single_char
-    is_single_char,
+    // 12. function is_single_number
+    is_single_number,
 });
