@@ -40,7 +40,7 @@ const delegate = {
                     return;
                 } else if (
                     or(
-                        regex.is_single_char(text),
+                        regex.is_single_num(text),
                         regex.is_paren_error(text),
                         regex.is_zero_error(text),
                         regex.is_overflow_error(text)
@@ -49,7 +49,7 @@ const delegate = {
                     element.textContent = constants.DEFAULT_ZERO;
                     return;
                 } else {
-                    element.textContent = utils.delete_char(text);
+                    element.textContent = utils.delete_item(text);
                     return;
                 }
             case "negate":
