@@ -19,9 +19,9 @@
 //      Replaces number 0 with number 1-9 if 0 follows operator. Prevents malformed expressions like 1 ÷ 05.
 //      replace_end("1 ÷ 0", "5") -> "1 ÷ 5"
 //
-//   6. delete_char(string) -> string
-//      Deletes character at end of string.
-//      delete_char("1 + 1") -> "1 + "
+//   6. delete_item(string) -> string
+//      Deletes item at end of string.
+//      delete_item("1 + 1") -> "1 + "
 // }
 // purpose: Module "utils" provides utility functions for string and number manipulation.
 
@@ -74,7 +74,7 @@ function replace_end(text, char) {
     return substring + char;
 }
 // 6. function delete_item
-function delete_char(text) {
+function delete_item(text) {
     // use [×^÷+-] literals instead of OPERATORS constant. "new Regular expression" syntax overly complicated.
     return text.replace(/\s[()]\s$|\s[×^÷+-]\s$|\-?\d+(?:\.\d+)?(?:[eE][+\-]?\d+)?$/, "");
 }
