@@ -73,10 +73,10 @@ function replace_end(text, char) {
     const substring = text.substring(0, text.length - 1);
     return substring + char;
 }
-// 6. function delete_char
+// 6. function delete_item
 function delete_char(text) {
     // use [×^÷+-] literals instead of OPERATORS constant. "new Regular expression" syntax overly complicated.
-    return text.replace(/\s[()]\s$|\s[×^÷+-]\s$|\.$|\-?\d$|e$/, "");
+    return text.replace(/\s[()]\s$|\s[×^÷+-]\s$|\-?\d+(?:\.\d+)?(?:[eE][+\-]?\d+)?$/, "");
 }
 
 export default Object.freeze({
@@ -85,5 +85,5 @@ export default Object.freeze({
     fix_point,
     insert_imp,
     replace_end,
-    delete_char,
+    delete_item,
 });
