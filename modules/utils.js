@@ -76,7 +76,10 @@ function replace_end(text, char) {
 // 6. function delete_item
 function delete_item(text) {
     // use [×^÷+-] literals instead of OPERATORS constant. "new Regular expression" syntax overly complicated.
-    return text.replace(/\s[()]\s$|\s[×^÷+-]\s$|\-?\d+(?:\.\d+)?(?:[eE][+\-]?\d+)?$/, "");
+    return text.replace(
+        /\s[()]\s$|\s[×^÷+-]\s$|\-?\d+(?:\.\d+)?(?:[eE][+\-]?\d+)?$/,
+        ""
+    );
 }
 
 export default Object.freeze({
