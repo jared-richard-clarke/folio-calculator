@@ -27,7 +27,7 @@
     font-family: "IBM Plex Sans", "Helvetica Neue", Helvetica, Arial,
         "Open Sans", sans-serif;
     font-size: 1.15rem;
-    max-width: 40rem;
+    max-width: 32rem;
     margin: 0 auto;
     padding: 0 1rem;
 }
@@ -103,3 +103,4 @@
 .calc__button--secondary:active {
     background-color: var(--button-bg-secondary-active);
 }
+
