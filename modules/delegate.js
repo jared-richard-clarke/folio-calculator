@@ -2,10 +2,6 @@ import constants from "./constants.js";
 import compute from "./compute.js";
 import regex from "./regex.js";
 import utils from "./utils.js";
-import cond from "./cond.js";
-
-// destructure and/or functions from conditionals.
-const { and, or } = cond;
 
 // const delegate = readonly {
 //   1. controls(string, string, string) -> void
@@ -39,12 +35,10 @@ const delegate = {
                 if (regex.is_default_zero(text)) {
                     return;
                 } else if (
-                    or(
-                        regex.is_single_num(text),
-                        regex.is_paren_error(text),
-                        regex.is_zero_error(text),
-                        regex.is_overflow_error(text)
-                    )
+                    regex.is_single_number(text) ||
+                    regex.is_paren_error(text) ||
+                    regex.is_zero_error(text) ||
+                    regex.is_overflow_error(text)
                 ) {
                     element.textContent = constants.DEFAULT_ZERO;
                     return;
@@ -64,13 +58,11 @@ const delegate = {
     // 2. function operators
     operators: function (text, key, element) {
         if (
-            or(
-                regex.is_trailing_operator(text),
-                regex.is_open_paren(text),
-                regex.is_paren_error(text),
-                regex.is_zero_error(text),
-                regex.is_overflow_error(text)
-            )
+            regex.is_trailing_operator(text) ||
+            regex.is_open_paren(text) ||
+            regex.is_paren_error(text) ||
+            regex.is_zero_error(text) ||
+            regex.is_overflow_error(text)
         ) {
             return;
         } else {
@@ -80,12 +72,10 @@ const delegate = {
     // 3. function operands
     operands: function (text, key, element) {
         if (
-            or(
-                regex.is_default_zero(text),
-                regex.is_zero_error(text),
-                regex.is_paren_error(text),
-                regex.is_overflow_error(text)
-            )
+            regex.is_default_zero(text) ||
+            regex.is_zero_error(text) ||
+            regex.is_paren_error(text) ||
+            regex.is_overflow_error(text)
         ) {
             element.textContent = key;
             return;
@@ -99,13 +89,11 @@ const delegate = {
     // 4. function parens
     parens: function (text, key, element) {
         if (
-            and(
-                key === constants.CLO,
-                or(regex.is_trailing_operator(text), regex.is_open_paren(text))
-            )
+            key === constants.CLO &&
+            (regex.is_trailing_operator(text) || regex.is_open_paren(text))
         ) {
             return;
-        } else if (and(key === constants.OPE, regex.is_default_zero(text))) {
+        } else if (key === constants.OPE && regex.is_default_zero(text)) {
             element.textContent = constants.PAREN_MAP[key];
             return;
         } else {
@@ -114,7 +102,7 @@ const delegate = {
     },
     // 5. function decimal
     decimal: function (text, key, element) {
-        if (or(!regex.is_trailing_digit(text), regex.is_decimal(text))) {
+        if (!regex.is_trailing_digit(text) || regex.is_decimal(text)) {
             return;
         } else {
             element.textContent += key;
@@ -123,12 +111,10 @@ const delegate = {
     // 6. function equals
     equals: function (text, element) {
         if (
-            or(
-                regex.is_paren_error(text),
-                regex.is_zero_error(text),
-                regex.is_overflow_error(text),
-                regex.is_trailing_operator(text)
-            )
+            regex.is_paren_error(text) ||
+            regex.is_zero_error(text) ||
+            regex.is_overflow_error(text) ||
+            regex.is_trailing_operator(text)
         ) {
             return;
         } else if (regex.is_divide_by_zero(text)) {
@@ -147,9 +133,7 @@ const delegate = {
                     element.textContent = constants.OVERFLOW_ERROR;
                     return;
                 } else {
-                    element.textContent = String(
-                        utils.fix_point(result)
-                    );
+                    element.textContent = String(utils.fix_point(result));
                 }
             }
         }
