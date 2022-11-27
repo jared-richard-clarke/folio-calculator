@@ -117,30 +117,6 @@ const parse = (function () {
 })();
 // 3. function evaluate
 const evaluate = (function () {
-    const operations = (function () {
-        function add(x, y) {
-            return x + y;
-        }
-        function subtract(x, y) {
-            return x - y;
-        }
-        function multiply(x, y) {
-            return x * y;
-        }
-        function divide(x, y) {
-            return x / y;
-        }
-        function exponent(x, y) {
-            return x ** y;
-        }
-        return Object.freeze({
-            add,
-            subtract,
-            multiply,
-            divide,
-            exponent,
-        });
-    })();
     function evaluator(postfix) {
         const stack = [];
         let operand1 = 0;
@@ -152,23 +128,23 @@ const evaluate = (function () {
                 operand2 = stack.pop();
                 operand1 = stack.pop();
                 if (token === ADD) {
-                    stack.push(operations.add(operand1, operand2));
+                    stack.push(operand1 + operand2);
                     return;
-                }
+                        }
                 if (token === SUB) {
-                    stack.push(operations.subtract(operand1, operand2));
+                    stack.push(operand1 - operand2);
                     return;
                 }
                 if (token === MUL || token === IMP) {
-                    stack.push(operations.multiply(operand1, operand2));
+                    stack.push(operand1 * operand2);
                     return;
                 }
                 if (token === DIV) {
-                    stack.push(operations.divide(operand1, operand2));
+                    stack.push(operand1 / operand2);
                     return;
                 }
                 if (token === EXP) {
-                    stack.push(operations.exponent(operand1, operand2));
+                    stack.push(operand1 ** operand2);
                     return;
                 }
             }
