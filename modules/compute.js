@@ -130,7 +130,7 @@ const evaluate = (function () {
                 if (token === ADD) {
                     stack.push(operand1 + operand2);
                     return;
-                        }
+                }
                 if (token === SUB) {
                     stack.push(operand1 - operand2);
                     return;
