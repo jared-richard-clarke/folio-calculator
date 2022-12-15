@@ -106,7 +106,7 @@ const parse = (function () {
             mismatched_open_parens = true;
         }
         // === Return Value ===
-        // return postfix stack or null for mismatched parentheses
+        // return postfix stack or PAREN_ERROR for mismatched parentheses
         if (mismatched_close_parens || mismatched_open_parens) {
             return PAREN_ERROR;
         } else {
