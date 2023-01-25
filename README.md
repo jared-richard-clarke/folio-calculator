@@ -6,7 +6,7 @@
 - Document Object Model (DOM)
 
 ## Project:
-December 2020, I resolved to teach myself how to program. This calculator is the culmination of careful study.
+December 2021, I resolved to teach myself how to program. This calculator is the culmination of careful study.
 
 My calculator is comprised of three core modules: `compute`, `regex`, and `delegate`. Module `compute` provides a rudimentary tokenizer, parser, and evaluator. it uses the *Shunting Yard Algorithm* to convert infix to postfix notation for simple evaluation via a stack.
 
