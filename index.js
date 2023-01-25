@@ -28,5 +28,7 @@ calculator.addEventListener("click", function (event) {
         delegate.decimal(text, key, output);
     } else if (LOOKUP.equals.includes(key)) {
         delegate.equals(text, output);
+    } else {
+        return;
     }
 });
