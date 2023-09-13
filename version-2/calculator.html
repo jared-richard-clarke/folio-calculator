@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="author" content="Jared Clarke" />
+        <meta
+            name="description"
+            content="A calculator application implementing Pratt parsing."
+        />
+        <meta
+            name="keywords"
+            content="calculator, application, Pratt parsing"
+        />
+        <!-- Fira Code: 300-700 -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <!-- calculator styles -->
+        <link rel="stylesheet" href="calculator.css">
+        <title>Jared Clarke | Calculator</title>
+    </head>
+    <body>
+        <form data-calculator class="calc" tabindex="0">
+            <fieldset class="calc__fieldset">
+                <legend>output</legend>
+                <pre class="calc__output"><output data-calculator-output></output></pre>
+            </fieldset>
+            <fieldset class="calc__fieldset">
+                <legend>input</legend>
+                <pre class="calc__output calc__output--input"><output data-calculator-input></output></pre>
+            </fieldset>
+            <fieldset class="calc__fieldset">
+                <legend>operators</legend>
+                <div class="calc__grid">
+                    <button class="calc__button calc__button--tertiary" type="button" value="space">space</button>
+                    <button class="calc__button calc__button--tertiary" type="button" value="delete">delete</button>
+                    <button class="calc__button calc__button--tertiary" type="button" value="clear">clear</button>
+                    <button class="calc__button calc__button--secondary" aria-label="open parenthesis" type="button" value="(">
+                        (
+                    </button>
+                    <button class="calc__button calc__button--secondary" aria-label="close parenthesis" type="button" value=")">
+                        )
+                    </button>
+                    <button class="calc__button calc__button--secondary" type="button" value="+">+</button>
+                    <button class="calc__button calc__button--secondary" type="button" value="-">−</button>
+                    <button class="calc__button calc__button--secondary" type="button" value="×">×</button>
+                    <button class="calc__button calc__button--secondary" type="button" value="/">/</button>
+                    <button class="calc__button calc__button--secondary" aria-label="exponent" type="button" value="^">^</button>
+                    <button class="calc__button calc__button--tertiary calc__button--xl" type="button" value="=">=</button>
+                </div>
+            </fieldset>
+            <fieldset class="calc__fieldset">
+                <legend>operands</legend>
+                <div class="calc__grid">
+                    <button class="calc__button" type="button" value="7">7</button>
+                    <button class="calc__button" type="button" value="8">8</button>
+                    <button class="calc__button" type="button" value="9">9</button>
+                    <button class="calc__button" type="button" value="4">4</button>
+                    <button class="calc__button" type="button" value="5">5</button>
+                    <button class="calc__button" type="button" value="6">6</button>
+                    <button class="calc__button" type="button" value="1">1</button>
+                    <button class="calc__button" type="button" value="2">2</button>
+                    <button class="calc__button" type="button" value="3">3</button>
+                    <button class="calc__button font-extrabold" aria-label="decimal point" type="button" value=".">
+                        .
+                    </button>
+                    <button class="calc__button calc__button--xl" type="button" value="0">0</button>
+                </div>
+            </fieldset>
+        </form>
+        <script type="module" src="modules/constants.js"></script>
+        <script type="module" src="modules/utils.js"></script>
+        <script type="module" src="calculator.js"></script>
+    </body>
+</html>
