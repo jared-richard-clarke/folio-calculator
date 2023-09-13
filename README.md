@@ -1,4 +1,4 @@
-# Calculator: 1
+# Calculator: Version 1
 
 ## Tools:
 - Shunting Yard Algorithm
