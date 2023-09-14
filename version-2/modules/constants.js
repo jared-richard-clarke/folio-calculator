@@ -57,6 +57,7 @@ export default Object.freeze({
     COMPLEX: "Creates complex number. ",
     UNKNOWN: "Unknown identifier. ",
     LEADING_ZERO: "Leading zero. ",
+    MISPLACED_NUMBER: "Misplaced number. ",
     MISPLACED_DECIMAL: "Misplaced decimal. ",
     MISPLACED_EXPONENT: "Misplaced exponent suffix. ",
     NOT_NUMBER: "Not a number. ",
