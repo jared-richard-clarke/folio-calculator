@@ -93,6 +93,7 @@ calculator.addEventListener("click", function (event) {
 });
 
 calculator.addEventListener("keydown", function (event) {
+    event.preventDefault();
     if (!event.repeat) {
         const key = utils.key_map[event.key];
         if (key !== undefined) {
