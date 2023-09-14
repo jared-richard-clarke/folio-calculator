@@ -53,8 +53,10 @@ const binary_operation = Object.freeze({
 
 const key_map = Object.freeze({
     " ": constants.SPACE,
+    "Space": constants.SPACE,
     "Backspace": constants.DELETE,
     "Clear": constants.CLEAR,
+    "Enter": constants.EQUAL,
     "=": constants.EQUAL,
     "(": constants.OPEN_PAREN,
     ")": constants.CLOSE_PAREN,
