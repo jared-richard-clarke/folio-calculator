@@ -223,6 +223,7 @@ export const parse = (function () {
             token.message += constants.MISMATCHED_PAREN;
             return [null, token];
         }
+        // Consume the matching closed parenthesis.
         state.next();
         return [x, null];
     }
@@ -320,10 +321,10 @@ export const parse = (function () {
         // Check for unused tokens.
         if (!state.consumed()) {
             const token = state.next();
-            if (token.type === constants.CLOSE_PAREN) {
-                token.message += constants.MISMATCHED_PAREN;
-            } else if (token.type === constants.NUMBER) {
+            if (token.type === constants.NUMBER) {
                 token.message += constants.MISPLACED_NUMBER;
+            } else if (token.type === constants.CLOSE_PAREN) {
+                token.message += constants.MISMATCHED_PAREN;
             } else {
                 token.message += constants.INCOMPLETE_EXPRESSION;
             }
