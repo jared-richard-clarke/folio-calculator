@@ -20,55 +20,166 @@
             rel="stylesheet"
         />
         <!-- calculator styles -->
-        <link rel="stylesheet" href="calculator.css">
+        <link rel="stylesheet" href="calculator.css" />
         <title>Jared Clarke | Calculator</title>
     </head>
     <body>
-        <form data-calculator class="calc" tabindex="0">
+        <form class="calc" data-calculator tabindex="0">
             <fieldset class="calc__fieldset">
                 <legend>output</legend>
-                <pre class="calc__output"><output data-calculator-output></output></pre>
+                <pre
+                    class="calc__output"
+                ><output data-calculator-output></output></pre>
             </fieldset>
             <fieldset class="calc__fieldset">
                 <legend>input</legend>
-                <pre class="calc__output calc__output--input"><output data-calculator-input></output></pre>
+                <pre
+                    class="calc__output calc__output--input"
+                ><output data-calculator-input></output></pre>
             </fieldset>
             <fieldset class="calc__fieldset">
                 <legend>operators</legend>
                 <div class="calc__grid">
-                    <button class="calc__button calc__button--tertiary" type="button" value="space">space</button>
-                    <button class="calc__button calc__button--tertiary" type="button" value="delete">delete</button>
-                    <button class="calc__button calc__button--tertiary" type="button" value="clear">clear</button>
-                    <button class="calc__button calc__button--secondary" aria-label="open parenthesis" type="button" value="(">
+                    <button
+                        class="calc__button calc__button--tertiary"
+                        type="button"
+                        value="space"
+                        tabindex="-1"
+                    >
+                        space
+                    </button>
+                    <button
+                        class="calc__button calc__button--tertiary"
+                        type="button"
+                        value="delete"
+                        tabindex="-1"
+                    >
+                        delete
+                    </button>
+                    <button
+                        class="calc__button calc__button--tertiary"
+                        type="button"
+                        value="clear"
+                        tabindex="-1"
+                    >
+                        clear
+                    </button>
+                    <button
+                        class="calc__button calc__button--secondary"
+                        aria-label="open parenthesis"
+                        type="button"
+                        value="("
+                        tabindex="-1"
+                    >
                         (
                     </button>
-                    <button class="calc__button calc__button--secondary" aria-label="close parenthesis" type="button" value=")">
+                    <button
+                        class="calc__button calc__button--secondary"
+                        aria-label="close parenthesis"
+                        type="button"
+                        value=")"
+                        tabindex="-1"
+                    >
                         )
                     </button>
-                    <button class="calc__button calc__button--secondary" type="button" value="+">+</button>
-                    <button class="calc__button calc__button--secondary" type="button" value="-">−</button>
-                    <button class="calc__button calc__button--secondary" type="button" value="×">×</button>
-                    <button class="calc__button calc__button--secondary" type="button" value="/">/</button>
-                    <button class="calc__button calc__button--secondary" aria-label="exponent" type="button" value="^">^</button>
-                    <button class="calc__button calc__button--tertiary calc__button--xl" type="button" value="=">=</button>
+                    <button
+                        class="calc__button calc__button--secondary"
+                        type="button"
+                        value="+"
+                        tabindex="-1"
+                    >
+                        +
+                    </button>
+                    <button
+                        class="calc__button calc__button--secondary"
+                        type="button"
+                        value="-"
+                        tabindex="-1"
+                    >
+                        −
+                    </button>
+                    <button
+                        class="calc__button calc__button--secondary"
+                        type="button"
+                        value="×"
+                        tabindex="-1"
+                    >
+                        ×
+                    </button>
+                    <button
+                        class="calc__button calc__button--secondary"
+                        type="button"
+                        value="/"
+                        tabindex="-1"
+                    >
+                        /
+                    </button>
+                    <button
+                        class="calc__button calc__button--secondary"
+                        aria-label="exponent"
+                        type="button"
+                        value="^"
+                        tabindex="-1"
+                    >
+                        ^
+                    </button>
+                    <button
+                        class="calc__button calc__button--tertiary calc__button--lg"
+                        type="button"
+                        value="="
+                        tabindex="-1"
+                    >
+                        =
+                    </button>
                 </div>
             </fieldset>
             <fieldset class="calc__fieldset">
                 <legend>operands</legend>
                 <div class="calc__grid">
-                    <button class="calc__button" type="button" value="7">7</button>
-                    <button class="calc__button" type="button" value="8">8</button>
-                    <button class="calc__button" type="button" value="9">9</button>
-                    <button class="calc__button" type="button" value="4">4</button>
-                    <button class="calc__button" type="button" value="5">5</button>
-                    <button class="calc__button" type="button" value="6">6</button>
-                    <button class="calc__button" type="button" value="1">1</button>
-                    <button class="calc__button" type="button" value="2">2</button>
-                    <button class="calc__button" type="button" value="3">3</button>
-                    <button class="calc__button font-extrabold" aria-label="decimal point" type="button" value=".">
+                    <button class="calc__button" type="button" value="7" tabindex="-1">
+                        7
+                    </button>
+                    <button class="calc__button" type="button" value="8" tabindex="-1">
+                        8
+                    </button>
+                    <button class="calc__button" type="button" value="9" tabindex="-1">
+                        9
+                    </button>
+                    <button class="calc__button" type="button" value="4" tabindex="-1">
+                        4
+                    </button>
+                    <button class="calc__button" type="button" value="5" tabindex="-1">
+                        5
+                    </button>
+                    <button class="calc__button" type="button" value="6" tabindex="-1">
+                        6
+                    </button>
+                    <button class="calc__button" type="button" value="1" tabindex="-1">
+                        1
+                    </button>
+                    <button class="calc__button" type="button" value="2" tabindex="-1">
+                        2
+                    </button>
+                    <button class="calc__button" type="button" value="3" tabindex="-1">
+                        3
+                    </button>
+                    <button
+                        class="calc__button font-extrabold"
+                        aria-label="decimal point"
+                        type="button"
+                        value="."
+                        tabindex="-1"
+                    >
                         .
                     </button>
-                    <button class="calc__button calc__button--xl" type="button" value="0">0</button>
+                    <button
+                        class="calc__button calc__button--lg"
+                        type="button"
+                        value="0"
+                        tabindex="-1"
+                    >
+                        0
+                    </button>
                 </div>
             </fieldset>
         </form>
