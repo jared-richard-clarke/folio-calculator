@@ -270,7 +270,7 @@ export const parse = (function () {
         register_binary(
             10,
             [constants.ADD, constants.SUBTRACT, constants.SUBTRACT_ALT],
-            parse_left
+            parse_left,
         );
         register_binary(
             20,
@@ -280,13 +280,13 @@ export const parse = (function () {
                 constants.DIVIDE,
                 constants.DIVIDE_ALT,
             ],
-            parse_left
+            parse_left,
         );
         register_binary(30, [constants.IMPLIED_MULTIPLY], parse_left);
         register_unary(
             40,
             [constants.ADD, constants.SUBTRACT, constants.SUBTRACT_ALT],
-            parse_unary
+            parse_unary,
         );
         register_binary(50, [constants.EXPONENT], parse_right);
         register(60, constants.ERROR, parse_unary_error);
@@ -322,6 +322,8 @@ export const parse = (function () {
             const token = state.next();
             if (token.type === constants.CLOSE_PAREN) {
                 token.message += constants.MISMATCHED_PAREN;
+            } else if (token.type === constants.NUMBER) {
+                token.message += constants.MISPLACED_NUMBER;
             } else {
                 token.message += constants.INCOMPLETE_EXPRESSION;
             }
@@ -348,25 +350,23 @@ export function format(parser, text) {
     const caret = "^";
     const expression = text.replace(/\s/g, space) + linefeed;
 
-    const locators =
-        errors
-            .map((error, index, array) => {
-                let offset = 0;
-                const column = error.column;
-                if (index > 0) {
-                    const prev = array[index - 1];
-                    offset = prev.column + prev.length;
-                }
-                return space.repeat(column - offset) + caret;
-            })
-            .join("") + linefeed;
+    const locators = errors
+        .map((error, index, array) => {
+            let offset = 0;
+            const column = error.column;
+            if (index > 0) {
+                const prev = array[index - 1];
+                offset = prev.column + prev.length;
+            }
+            return space.repeat(column - offset) + caret;
+        })
+        .join("") + linefeed;
 
-    const messages =
-        errors
-            .map((error, index) => {
-                const count = String(index + 1) + period;
-                return count + error.message;
-            })
-            .join("") + linefeed;
+    const messages = errors
+        .map((error, index) => {
+            const count = String(index + 1) + period;
+            return count + error.message;
+        })
+        .join("") + linefeed;
     return [null, expression + locators + messages];
 }
