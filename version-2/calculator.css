@@ -117,10 +117,6 @@ body {
     background-color: var(--background-primary-active);
 }
 
-.calc__button:focus-visible {
-    outline: var(--folio-focus-width) var(--folio-focus-style) var(--folio-focus-color);
-}
-
 .calc__button--secondary {
     background-color: var(--background-secondary);
     border-color: var(--border-secondary);
@@ -149,10 +145,6 @@ body {
 }
 
 .calc__button--lg {
-    grid-column: span 3 / span 3;
-}
-
-.calc__button--xl {
     grid-column: span 4 / span 4;
 }
 
