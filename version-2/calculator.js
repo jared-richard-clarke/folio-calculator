@@ -4,8 +4,8 @@ import utils from "./modules/utils.js";
 
 // === CALCULATOR: components ===
 const calculator = document.querySelector("[data-calculator]");
-const output = document.querySelector("[data-calculator-output]");
-const input = document.querySelector("[data-calculator-input]");
+const output = calculator.querySelector("[data-calculator-output]");
+const input = calculator.querySelector("[data-calculator-input]");
 const cursor = "|";
 // Programmatically set cursor to show JavaScript is active.
 input.textContent = cursor;
