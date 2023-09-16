@@ -250,7 +250,7 @@ export const parse = (function () {
         }
         register(0, [constants.ERROR], {
             prefix: null,
-            infix: null
+            infix: null,
         });
         register(0, [constants.EOF], {
             prefix: parse_eof,
@@ -328,7 +328,7 @@ export const parse = (function () {
             const token = state.next();
             if (token.type === constants.NUMBER) {
                 token.message += constants.MISPLACED_NUMBER;
-            } 
+            }
             if (token.type === constants.CLOSE_PAREN) {
                 token.message += constants.MISMATCHED_PAREN;
             }
