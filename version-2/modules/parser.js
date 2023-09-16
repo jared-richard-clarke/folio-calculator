@@ -111,7 +111,7 @@ export const parse = (function () {
     // either an evaluated expression or an array of error tokens.
     function parse_expression(rbp) {
         const token = state.next();
-        const [prefix, ok] = table.get_parser("prefix", token.type);
+        const [prefix, ok] = table.get_parser(token.type, "prefix");
         if (!ok) {
             token.message += constants.NOT_PREFIX;
             return [null, token];
@@ -120,9 +120,9 @@ export const parse = (function () {
         if (error !== null) {
             return [null, error];
         }
-        while (rbp < table.get_binding("bind", state.peek())) {
+        while (rbp < table.get_binding(state.peek())) {
             const token = state.next();
-            const [infix, ok] = table.get_parser("infix", token.type);
+            const [infix, ok] = table.get_parser(token.type, "infix");
             if (!ok) {
                 token.message += constants.NOT_INFIX;
                 return [null, token];
@@ -149,17 +149,15 @@ export const parse = (function () {
         return [null, token];
     }
 
-    // Resolves any error token called in a prefix position.
-    function parse_unary_error(token) {
+    // Calling the associated function on a closing parenthesis
+    // means the parenthesis hasn't been consumed by a grouping expression,
+    // meaning its a mismatched parenthesis.
+    function parse_closed_paren(token) {
+        token.message += constants.MISMATCHED_PAREN;
         return [null, token];
     }
-    // Resolves any error token called in an infix position.
-    function parse_binary_error(x, token) {
-        x = null;
-        return [x, token];
-    }
-    // Parses number expressions. Transforms string value into
-    // a big float object for evaluation.
+
+    // Parses number expressions.
     function parse_number(token) {
         const number = Number.parseFloat(token.value);
         if (Number.isNaN(number)) {
@@ -175,7 +173,7 @@ export const parse = (function () {
     // Parses unary expressions. Parses expression, and, if successful,
     // calls the associated unary operation on that expression.
     function parse_unary(token) {
-        const bind = table.get_binding("prebind", token.type);
+        const bind = table.get_binding(token.type);
         const [x, error] = parse_expression(bind);
         if (error !== null) {
             return [null, error];
@@ -189,7 +187,7 @@ export const parse = (function () {
     // binary operation on both the right and left expressions.
     function parse_binary(left) {
         return function (x, token) {
-            const bind = table.get_binding("bind", token.type);
+            const bind = table.get_binding(token.type);
             const [y, error] = parse_expression(left ? bind : bind - 1);
             if (error !== null) {
                 return [null, error];
@@ -198,10 +196,6 @@ export const parse = (function () {
             const value = operation(x, y);
             if (typeof value === "string") {
                 token.message += value;
-                return [null, token];
-            }
-            if (!Number.isFinite(value)) {
-                token.message += constants.OPERATION_RANGE;
                 return [null, token];
             }
             return [value, null];
@@ -223,7 +217,7 @@ export const parse = (function () {
             token.message += constants.MISMATCHED_PAREN;
             return [null, token];
         }
-        // Consume the matching closed parenthesis.
+        // Consume the closing parenthesis.
         state.next();
         return [x, null];
     }
@@ -238,44 +232,51 @@ export const parse = (function () {
     //
     // > table.get_binding(string) -> number
     //   Returns the binding power of the associated lexeme.
+    //   If, for whatever reason, the lexeme has no binding power, the function
+    //   will return 0 as a default.
     const table = (function () {
         // === table: registry ===
-        const registry = {
-            prefix: {},
-            infix: {},
-            bind: {},
-            prebind: {},
-        };
-        // Helper functions map the parsers and bindings to their associated lexemes
+        const registry = Object.create(null);
+        // Helper function maps the parsers and bindings to their associated lexemes
         // within the lookup table's internal registry.
-        function register(bind, type, parser) {
-            registry.prefix[type] = parser;
-            registry.bind[type] = bind;
-        }
-        function register_unary(bind, types, parser) {
-            types.forEach((type) => {
-                registry.prefix[type] = parser;
-                registry.prebind[type] = bind;
+        function register(bind, lexemes, { prefix, infix }) {
+            lexemes.forEach((lexeme) => {
+                registry[lexeme] = {
+                    bind,
+                    prefix,
+                    infix,
+                };
             });
         }
-        function register_binary(bind, types, parser) {
-            types.forEach((type) => {
-                registry.infix[type] = parser;
-                registry.bind[type] = bind;
-            });
-        }
-        // Building the lookup table.
-        register(0, constants.ERROR, parse_unary_error);
-        register_binary(0, [constants.ERROR], parse_binary_error);
-        register(0, constants.EOF, parse_eof);
-        register(0, constants.NUMBER, parse_number);
-        register(0, constants.OPEN_PAREN, parse_grouping);
-        register_binary(
-            10,
-            [constants.ADD, constants.SUBTRACT, constants.SUBTRACT_ALT],
-            parse_left,
-        );
-        register_binary(
+        register(0, [constants.ERROR], {
+            prefix: null,
+            infix: null
+        });
+        register(0, [constants.EOF], {
+            prefix: parse_eof,
+            infix: null,
+        });
+        register(0, [constants.NUMBER], {
+            prefix: parse_number,
+            infix: null,
+        });
+        register(0, [constants.OPEN_PAREN], {
+            prefix: parse_grouping,
+            infix: null,
+        });
+        register(0, [constants.CLOSE_PAREN], {
+            prefix: parse_closed_paren,
+            infix: null,
+        });
+        register(10, [constants.ADD], {
+            prefix: parse_unary,
+            infix: parse_left,
+        });
+        register(10, [constants.SUBTRACT, constants.SUBTRACT_ALT], {
+            prefix: parse_unary,
+            infix: parse_left,
+        });
+        register(
             20,
             [
                 constants.MULTIPLY,
@@ -283,22 +284,26 @@ export const parse = (function () {
                 constants.DIVIDE,
                 constants.DIVIDE_ALT,
             ],
-            parse_left,
+            { prefix: null, infix: parse_left },
         );
-        register_binary(30, [constants.IMPLIED_MULTIPLY], parse_left);
-        register_unary(
-            40,
-            [constants.ADD, constants.SUBTRACT, constants.SUBTRACT_ALT],
-            parse_unary,
-        );
-        register_binary(50, [constants.EXPONENT], parse_right);
+        register(30, [constants.IMPLIED_MULTIPLY], {
+            prefix: null,
+            infix: parse_left,
+        });
+        register(40, [constants.EXPONENT], {
+            prefix: null,
+            infix: parse_right,
+        });
 
-        function get_parser(category, type) {
-            const parser = registry[category][type];
-            return parser === undefined ? [null, false] : [parser, true];
+        function get_parser(lexeme, type) {
+            const parser = registry[lexeme][type];
+            return (parser === null || parser === undefined)
+                ? [null, false]
+                : [parser, true];
         }
-        function get_binding(category, type) {
-            return registry[category][type];
+        function get_binding(lexeme) {
+            const binding = registry[lexeme].bind;
+            return binding === undefined ? 0 : binding;
         }
 
         return Object.freeze({
@@ -323,10 +328,9 @@ export const parse = (function () {
             const token = state.next();
             if (token.type === constants.NUMBER) {
                 token.message += constants.MISPLACED_NUMBER;
-            } else if (token.type === constants.CLOSE_PAREN) {
+            } 
+            if (token.type === constants.CLOSE_PAREN) {
                 token.message += constants.MISMATCHED_PAREN;
-            } else {
-                token.message += constants.INCOMPLETE_EXPRESSION;
             }
             const errors = state.flush(token);
             return [null, errors];
