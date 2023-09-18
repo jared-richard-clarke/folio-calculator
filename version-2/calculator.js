@@ -31,7 +31,7 @@ const stack = (function () {
         }
         return methods;
     };
-    methods.to_string = function () {
+    methods.print = function () {
         return state.join("");
     };
     return Object.freeze(methods);
@@ -40,39 +40,43 @@ const stack = (function () {
 function delegate(key, stack) {
     // === digits ===
     if (utils.is_digit(key)) {
-        input.textContent = stack.pop().push(key, cursor).to_string();
+        input.textContent = stack.pop().push(key, cursor).print();
         // === operators ===
     } else if (utils.is_operator(key)) {
-        input.textContent = stack.pop().push(key, cursor).to_string();
+        input.textContent = stack.pop().push(key, cursor).print();
         // === parentheses ===
     } else if (utils.is_paren(key)) {
-        input.textContent = stack.pop().push(key, cursor).to_string();
+        input.textContent = stack.pop().push(key, cursor).print();
         // === decimal point ===
     } else if (key === constants.DECIMAL_POINT) {
-        input.textContent = stack.pop().push(key, cursor).to_string();
+        input.textContent = stack.pop().push(key, cursor).print();
         // === space ===
     } else if (key === constants.SPACE) {
-        input.textContent = stack.pop().push(constants.WHITE_SPACE, cursor)
-            .to_string();
+        input.textContent = stack
+            .pop()
+            .push(constants.WHITE_SPACE, cursor)
+            .print();
         // === delete ===
     } else if (key === constants.DELETE) {
         if (stack.is_empty()) {
             return;
         }
-        input.textContent = stack.pop().pop().push(cursor).to_string();
+        input.textContent = stack.pop().pop().push(cursor).print();
         // === clear ===
     } else if (key === constants.CLEAR) {
         if (!stack.is_empty()) {
-            input.textContent = stack.clear().push(cursor).to_string();
+            input.textContent = stack.clear().push(cursor).print();
         }
         // === equal ===
     } else if (key === constants.EQUAL) {
-        const text = stack.pop().to_string();
+        const text = stack.pop().print();
         const [success, failure] = format(parse, text);
         // "innerText" preserves formatting.
         if (success !== null) {
-            input.textContent = stack.clear().push(...success, cursor)
-                .to_string();
+            input.textContent = stack
+                .clear()
+                .push(...success, cursor)
+                .print();
             output.innerText = success + "\n=\n" + text;
             return;
         }
