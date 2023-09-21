@@ -56,9 +56,6 @@ body {
     --border-primary: #94a3b8;
     --border-secondary: #d97706;
     --border-tertiary: #0284c7;
-    --border-primary-hover: #64748b;
-    --border-secondary-hover: #b45309;
-    --border-tertiary-hover: #0369a1;
     width: 23rem;
     padding: 0.5rem;
     font-size: var(--folio-body-font-size-sm);
@@ -110,7 +107,6 @@ body {
 
 .calc__button:hover {
     background-color: var(--background-primary-hover);
-    border-color: var(--border-primary-hover);
 }
 
 .calc__button:active {
@@ -124,7 +120,6 @@ body {
 
 .calc__button--secondary:hover {
     background-color: var(--background-secondary-hover);
-    border-color: var(--border-secondary-hover);
 }
 
 .calc__button--secondary:active {
@@ -138,7 +133,6 @@ body {
 
 .calc__button--tertiary:hover {
     background-color: var(--background-tertiary-hover);
-    border-color: var(--border-tertiary-hover);
 }
 .calc__button--tertiary:active {
     background-color: var(--background-tertiary-active);
