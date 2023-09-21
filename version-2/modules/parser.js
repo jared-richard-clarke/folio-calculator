@@ -198,6 +198,10 @@ export const parse = (function () {
                 token.message += value;
                 return [null, token];
             }
+            if (!Number.isFinite(value)) {
+                token.message += constants.OPERATION_RANGE;
+                return [null, token];
+            }
             return [value, null];
         };
     }
