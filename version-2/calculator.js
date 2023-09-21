@@ -97,6 +97,7 @@ calculator.addEventListener("click", function (event) {
 });
 
 calculator.addEventListener("keydown", function (event) {
+    // For accessibility, allow tab to use default behavior.
     if (event.key !== "Tab") {
         event.preventDefault();
     }
