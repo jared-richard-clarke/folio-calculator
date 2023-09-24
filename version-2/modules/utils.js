@@ -33,10 +33,38 @@ function pow(x, y) {
     return Math.pow(x, y);
 }
 
+function square_root(x) {
+    if (x < 0) {
+        return constants.COMPLEX;
+    }
+    return Math.sqrt(x);
+}
+
+function percentage(x) {
+    return x / 100;
+}
+
+function factorial(x) {
+    if (x < 0 || !Number.isInteger(x)) {
+        return constants.FACTORIAL_ERROR;
+    }
+    if (x === 0) {
+        return 1;
+    }
+    let product = 1;
+    for (let i = 2; i <= x; i += 1) {
+        product *= i;
+    }
+    return product;
+}
+
 const unary_operation = Object.freeze({
     [constants.ADD]: identity,
     [constants.SUBTRACT]: neg,
     [constants.SUBTRACT_ALT]: neg,
+    [constants.SQUARE_ROOT]: square_root,
+    [constants.PERCENTAGE]: percentage,
+    [constants.FACTORIAL]: factorial
 });
 
 const binary_operation = Object.freeze({
@@ -57,6 +85,9 @@ const key_map = Object.freeze({
     "Backspace": constants.DELETE,
     "Clear": constants.CLEAR,
     "Enter": constants.EQUAL,
+    "√": constants.SQUARE_ROOT,
+    "%": constants.PERCENTAGE,
+    "!": constants.FACTORIAL,
     "=": constants.EQUAL,
     "(": constants.OPEN_PAREN,
     ")": constants.CLOSE_PAREN,
@@ -154,6 +185,9 @@ const is_operator = (function () {
         constants.DIVIDE,
         constants.DIVIDE_ALT,
         constants.EXPONENT,
+        constants.SQUARE_ROOT,
+        constants.PERCENTAGE,
+        constants.FACTORIAL,
     ]);
     return function (x) {
         return set.has(x);
