@@ -46,11 +46,15 @@ export default Object.freeze({
     DIVIDE: "÷",
     DIVIDE_ALT: "/",
     EXPONENT: "^",
+    SQUARE_ROOT: "√",
+    PERCENTAGE: "%",
+    FACTORIAL: "!",
     // === token labels ===
     NUMBER: "number",
     ERROR: "error",
     // === errors ===
     // Right padding added for formatting.
+    FACTORIAL_ERROR: "Only non-negative integers. ",
     NUMBER_RANGE: "Number outside range. ",
     OPERATION_RANGE: "Operation outside number range. ",
     DIVIDE_ZERO: "Cannot divide by zero. ",
@@ -60,6 +64,7 @@ export default Object.freeze({
     MISPLACED_NUMBER: "Dangling digit. ",
     MISPLACED_DECIMAL: "Misplaced decimal. ",
     MISPLACED_EXPONENT: "Misplaced exponent suffix. ",
+    MISPLACED_OPERATOR: "Dangling operator. ",
     NOT_NUMBER: "Not a number. ",
     NOT_PREFIX: "Not a prefix operation. ",
     NOT_INFIX: "Not an infix operation. ",
