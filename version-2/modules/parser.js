@@ -179,11 +179,16 @@ export const parse = (function () {
             return [null, error];
         }
         const operation = utils.unary_operation[token.type];
-        return [operation(x), null];
+        const value = operation(x);
+        if (typeof value === "string") {
+            token.message += value;
+            return [null, token];
+        }
+        return [value, null];
     }
 
     // Parses binary expressions. Takes a left expression and parses
-    // right expression, and, if successful, calls the associated
+    // a right expression, and, if successful, calls the associated
     // binary operation on both the right and left expressions.
     function parse_binary(left) {
         return function (x, token) {
@@ -204,6 +209,18 @@ export const parse = (function () {
             }
             return [value, null];
         };
+    }
+
+    // Parses postfix expressions. Takes a left expression and
+    // evaluates it.
+    function parse_postfix(x, token) {
+        const operation = utils.unary_operation[token.type];
+        const value = operation(x);
+        if (typeof value === "string") {
+            token.message += value;
+            return [null, token];
+        }
+        return [value, null];
     }
     // Parses binary expressions that associate left.
     const parse_left = parse_binary(true);
@@ -272,6 +289,10 @@ export const parse = (function () {
             prefix: parse_closed_paren,
             infix: null,
         });
+        register(0, [constants.SQUARE_ROOT], {
+            prefix: parse_unary,
+            infix: null,
+        });
         register(10, [
             constants.ADD,
             constants.SUBTRACT,
@@ -297,6 +318,10 @@ export const parse = (function () {
         register(40, [constants.EXPONENT], {
             prefix: null,
             infix: parse_right,
+        });
+        register(50, [constants.PERCENTAGE, constants.FACTORIAL], {
+            prefix: null,
+            infix: parse_postfix,
         });
 
         function get_parser(lexeme, type) {
@@ -332,9 +357,12 @@ export const parse = (function () {
             const token = state.next();
             if (token.type === constants.NUMBER) {
                 token.message += constants.MISPLACED_NUMBER;
-            }
+            } 
             if (token.type === constants.CLOSE_PAREN) {
                 token.message += constants.MISMATCHED_PAREN;
+            } 
+            if (utils.is_operator(token.type)) {
+                token.message += constants.MISPLACED_OPERATOR;
             }
             const errors = state.flush(token);
             return [null, errors];
