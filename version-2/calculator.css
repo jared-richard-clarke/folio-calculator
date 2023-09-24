@@ -70,7 +70,7 @@ body {
 
 .calc__grid {
     display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 0.25rem;
 }
 
@@ -98,7 +98,6 @@ body {
 }
 
 .calc__button {
-    grid-column: span 2 / span 2;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     font-size: var(--folio-body-font-size);
@@ -137,7 +136,7 @@ body {
 }
 
 .calc__button--lg {
-    grid-column: span 4 / span 4;
+    grid-column: span 2 / span 2;
 }
 
 .font-extrabold {
