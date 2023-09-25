@@ -184,6 +184,10 @@ export const parse = (function () {
             token.message += value;
             return [null, token];
         }
+        if (!Number.isFinite(value)) {
+            token.message += constants.OPERATION_RANGE;
+            return [null, token];
+        }
         return [value, null];
     }
 
@@ -210,6 +214,10 @@ export const parse = (function () {
             return [value, null];
         };
     }
+    // Parses binary expressions that associate left.
+    const parse_left = parse_binary(true);
+    // Parses binary expressions that associate right.
+    const parse_right = parse_binary(false);
 
     // Parses postfix expressions. Takes a left expression and
     // evaluates it.
@@ -220,12 +228,12 @@ export const parse = (function () {
             token.message += value;
             return [null, token];
         }
+        if (!Number.isFinite(value)) {
+            token.message += constants.OPERATION_RANGE;
+            return [null, token];
+        }
         return [value, null];
     }
-    // Parses binary expressions that associate left.
-    const parse_left = parse_binary(true);
-    // Parses binary expressions that associate right.
-    const parse_right = parse_binary(false);
 
     // Parses expressions grouped within parentheses. If an expression is parsed successfully,
     // following an open parenthesis, "parse_grouping" checks for a matching closed parenthesis.
