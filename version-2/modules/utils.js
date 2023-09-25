@@ -64,7 +64,7 @@ const unary_operation = Object.freeze({
     [constants.SUBTRACT_ALT]: neg,
     [constants.SQUARE_ROOT]: square_root,
     [constants.PERCENTAGE]: percentage,
-    [constants.FACTORIAL]: factorial
+    [constants.FACTORIAL]: factorial,
 });
 
 const binary_operation = Object.freeze({
