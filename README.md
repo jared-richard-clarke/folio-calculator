@@ -20,3 +20,7 @@ computer scientist Vaughan R. Pratt. My parser handles infix and prefix notation
 associativity, nested and mismatched parenthetical groupings, multiple levels of precedence and
 all types of whitespace. Errors are made explicit through robust error handling and a formatted
 user interface. 
+
+I also implemented a version of my calculator's core parser with a complementary big-number library.
+Its high precision calculations proved too computationally expensive and its output size too unyieldy
+for my calculator UI. This also can be found on [Github](https://github.com/jared-richard-clarke/pratt-parser). 
