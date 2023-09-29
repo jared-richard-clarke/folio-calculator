@@ -1,4 +1,4 @@
-# Portfolio Calculator: Version 2
+# Portfolio Calculator
 
 ## Tools:
 - Pratt Parser
