@@ -54,7 +54,7 @@ export default Object.freeze({
     ERROR: "error",
     // === errors ===
     // Right padding added for formatting.
-    FACTORIAL_ERROR: "Only non-negative integers. ",
+    FACTORIAL_ERROR: "Takes only non-negative integers. ",
     NUMBER_RANGE: "Number outside range. ",
     OPERATION_RANGE: "Operation outside number range. ",
     DIVIDE_ZERO: "Cannot divide by zero. ",
