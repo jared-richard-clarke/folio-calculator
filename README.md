@@ -13,7 +13,7 @@ this application to better reflect my improving skillset.
 Both calculators are built on top of expression parsers. My first parser was rudimentary — easily
 misled by unexpected character combinations and misplaced whitespace. Anticipating malformed user
 input is complex, and I had shifted much of this complexity over to a tangle of regular expressions.
-These too would occasionally fail.
+These too would fail.
 
 My new calculator's core is a **top-down operator precedence** parser based on ideas pioneered by the
 computer scientist **Vaughan R. Pratt**. My parser handles infix and prefix notation, left and right
