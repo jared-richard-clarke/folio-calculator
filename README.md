@@ -8,7 +8,7 @@
 
 December 2021, I resolved to teach myself how to program. This calculator — which I built with
 plain HTML, CSS, and JavaScript —was the culmination of careful study. September 2023, I rewrote
-this entire application from scratch to better reflect my improving skillset.
+this application to better reflect my improving skillset.
 
 Both calculators are built on top of expression parsers. My first parser was rudimentary — easily
 misled by unexpected character combinations and misplaced whitespace. Anticipating malformed user
