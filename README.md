@@ -22,5 +22,5 @@ and all types of whitespace. Errors are made explicit through robust error handl
 user interface. 
 
 I also implemented a version of my calculator's core parser with a complementary big-number library.
-Its high precision calculations proved too computationally expensive and its output size too unyieldy
+Its high precision calculations proved too computationally expensive and its output size too unwieldy
 for my calculator UI. This also can be found on [Github](https://github.com/jared-richard-clarke/pratt-parser). 
