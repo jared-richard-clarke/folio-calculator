@@ -15,8 +15,8 @@ misled by unexpected character combinations and misplaced whitespace. Anticipati
 input is complex, and I had shifted much of this complexity over to a tangle of regular expressions.
 These too would occasionally fail.
 
-My new calculator's core is a top-down operator precedence parser based on ideas pioneered by the
-computer scientist Vaughan R. Pratt. My parser handles infix and prefix notation, left and right
+My new calculator's core is a **top-down operator precedence** parser based on ideas pioneered by the
+computer scientist **Vaughan R. Pratt**. My parser handles infix and prefix notation, left and right
 associativity, nested and mismatched parenthetical groupings, multiple levels of precedence and
 all types of whitespace. Errors are made explicit through robust error handling and a formatted
 user interface. 
