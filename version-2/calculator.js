@@ -21,7 +21,7 @@ const stack = (function () {
         state.push(...xs);
         return methods;
     };
-    methods.pop = function () {
+    methods.drop = function () {
         state.pop();
         return methods;
     };
@@ -40,20 +40,20 @@ const stack = (function () {
 function delegate(key, stack) {
     // === digits ===
     if (utils.is_digit(key)) {
-        input.textContent = stack.pop().push(key, cursor).print();
+        input.textContent = stack.drop().push(key, cursor).print();
         // === operators ===
     } else if (utils.is_operator(key)) {
-        input.textContent = stack.pop().push(key, cursor).print();
+        input.textContent = stack.drop().push(key, cursor).print();
         // === parentheses ===
     } else if (utils.is_paren(key)) {
-        input.textContent = stack.pop().push(key, cursor).print();
+        input.textContent = stack.drop().push(key, cursor).print();
         // === decimal point ===
     } else if (key === constants.DECIMAL_POINT) {
-        input.textContent = stack.pop().push(key, cursor).print();
+        input.textContent = stack.drop().push(key, cursor).print();
         // === space ===
     } else if (key === constants.SPACE) {
         input.textContent = stack
-            .pop()
+            .drop()
             .push(constants.WHITE_SPACE, cursor)
             .print();
         // === delete ===
@@ -61,7 +61,7 @@ function delegate(key, stack) {
         if (stack.is_empty()) {
             return;
         }
-        input.textContent = stack.pop().pop().push(cursor).print();
+        input.textContent = stack.drop().drop().push(cursor).print();
         // === clear ===
     } else if (key === constants.CLEAR) {
         if (!stack.is_empty()) {
@@ -69,7 +69,7 @@ function delegate(key, stack) {
         }
         // === equal ===
     } else if (key === constants.EQUAL) {
-        const text = stack.pop().print();
+        const text = stack.drop().print();
         const [success, failure] = format(parse, text);
         // "innerText" preserves formatting.
         if (success !== null) {
