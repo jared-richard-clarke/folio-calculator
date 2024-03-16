@@ -48,6 +48,9 @@ function factorial(x) {
     if (x < 0 || !Number.isInteger(x)) {
         return constants.FACTORIAL_ERROR;
     }
+    if (!Number.isSafeInteger(x)) {
+        return constants.OPERATION_RANGE;
+    }
     if (x === 0) {
         return 1;
     }
