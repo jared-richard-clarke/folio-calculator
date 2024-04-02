@@ -45,10 +45,13 @@ function percentage(x) {
 }
 
 function factorial(x) {
+    // Limit operation to prevent factorial blowup.
+    // 18! = 6402373705728000 < Number.MAX_SAFE_INTEGER < 19! = 121645100408832000
+    const LIMIT = 18;
     if (x < 0 || !Number.isInteger(x)) {
         return constants.FACTORIAL_ERROR;
     }
-    if (!Number.isSafeInteger(x)) {
+    if (x > LIMIT) {
         return constants.OPERATION_RANGE;
     }
     if (x === 0) {
