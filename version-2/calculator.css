@@ -1,29 +1,10 @@
-:root {
-    --folio-white: #fff;
-    --folio-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto,
-    "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
-    "Noto Color Emoji";
-    --folio-font-monospace: "Fira Code", SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace;
-    --folio-body-font-family: var(--folio-font-sans-serif);
-    --folio-body-font-size: 1rem;
-    --folio-body-font-weight: 400;
-    --folio-body-line-height: 1.5;
-    --folio-body-font-size-sm: 0.85rem;
-    --folio-body-color: #313539;
-    --folio-body-bg: #f8fafc;
-    --folio-focus-width: 1px;
-    --folio-focus-style: solid;
-    --folio-focus-color: var(--folio-body-color);
-    --folio-focus-outline: var(--folio-focus-width) var(--folio-focus-style) var(--folio-focus-color);
-    --folio-box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-}
-
+/* reset */
 *,
 *::before,
 *::after {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -32,115 +13,151 @@
     }
 }
 
+/* center calculator on screen */
 body {
-    margin: 0;
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: var(--folio-body-font-family);
-    font-size: var(--folio-body-font-size);
-    font-weight: var(--folio-body-font-weight);
-    line-height: var(--folio-body-line-height);
-    color: var(--folio-body-color);
-    background-color: var(--folio-body-bg);
+    height: 100vh;
 }
 
-.calc {
-    --background-primary: var(--folio-white);
-    --background-primary-hover: #e2e8f0;
-    --background-primary-active: #cbd5e1;
-    --border-primary: #64748b;
-    --background-secondary: #fef08a;
-    --background-secondary-hover: #fde047;
-    --background-secondary-active: #fcd34d;
-    --border-secondary: #b45309;
-    --background-tertiary: #dbeafe;
-    --background-tertiary-hover: #bfdbfe;
-    --background-tertiary-active: #93c5fd;
-    --border-tertiary: #013ea2;
-    width: 23rem;
-    padding: 0.5rem;
-    font-size: var(--folio-body-font-size-sm);
-    line-height: 1.25rem;
+/* calculator */
+.calculator {
+    /* fonts */
+    --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+        "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji",
+        "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-monospace: "Fira Code", SFMono-Regular, Menlo, Monaco, Consolas,
+        "Liberation Mono", "Courier New", monospace;
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.85rem;
+    --font-size: 1rem;
+    --font-weight-light: 200;
+    --font-weight: 400;
+    --font-weight-bold: 700;
+    --font-line-height-tight: 1.25;
+    --font-line-height: 1.5;
+    /* border */
+    --border-width: 1px;
+    --border-style: solid;
+    --border-radius: 0.125rem;
+    /* spacing */
+    --spacing-xs: 0.125rem;
+    --spacing-sm: 0.25rem;
+    --spacing: 0.5rem;
+    --spacing-lg: 1rem;
+    --spacing-xl: 1.5rem;
+    /* theme */
+    --primary-black: rgb(49 53 57);
+    --primary-white: rgb(255 255 255);
+    --primary-background: var(--primary-white);
+    --primary-background-hover: rgb(226 232 240);
+    --primary-background-active: rgb(203 213 225);
+    --primary-border: var(--border-width) var(--border-style) rgb(100 116 139);
+    --secondary-background: rgb(254 240 138);
+    --secondary-background-hover: rgb(253 224 71);
+    --secondary-background-active: rgb(252 211 77);
+    --secondary-border: var(--border-width) var(--border-style) rgb(180 83 9);
+    --tertiary-background: rgb(219 234 254);
+    --tertiary-background-hover: rgb(191 219 254);
+    --tertiary-background-active: rgb(147 197 253);
+    --tertiary-border: var(--border-width) var(--border-style) rgb(30 64 175);
+    /* other */
+    --cursor: pointer;
+    --focus-ring: 3px solid rgb(13 110 253 / 0.5);
+    --box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --screen-height: calc(var(--font-size-sm) * 3);
+    width: 24rem;
+    padding: var(--spacing);
+    font-family: var(--font-sans);
+    font-size: var(--font-size);
+    font-weight: var(--font-weight);
+    line-height: var(--font-line-height);
+    color: var(--primary-black);
+    border-radius: var(--border-radius);
 }
-.calc:focus-within {
-    outline: var(--folio-focus-outline);
+.calculator:focus-within {
+    outline: var(--focus-ring);
 }
-
-.calc__grid {
+.calculator__fieldset {
+    /* 
+      CSS grid allows fieldset to both fill its container
+      and contain overflow.
+    */
+    display: grid;
+    padding-inline: var(--spacing);
+    padding-block-start: var(--spacing-xs);
+    padding-block-end: var(--spacing);
+    border: var(--border-style) var(--border-width) rgb(148 163 184);
+    border-radius: var(--border-radius);
+}
+.calculator__label {
+    font-size: var(--font-size-sm);
+}
+.calculator__screen {
+    display: flex;
+    align-items: center;
+    height: var(--screen-height);
+    background-color: var(--primary-background);
+    outline: var(--primary-border);
+    overflow-x: scroll;
+}
+.calculator__screen--output {
+    height: calc(var(--screen-height) * 2.5);
+}
+.calculator__text {
+    padding-inline: var(--spacing-lg);
+    font-family: var(--font-monospace);
+    font-size: var(--font-size-sm);
+    line-height: var(--font-line-height-tight);
+    letter-spacing: -0.05em;
+    font-variant-ligatures: none;
+    white-space: pre;
+}
+.calculator__buttons {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 0.25rem;
+    gap: var(--spacing-sm);
 }
-
-.calc__fieldset {
-    border: 1px solid #cbd5e1;
-    border-radius: 1px;
+.calculator__button {
+    padding-block: var(--spacing);
+    background-color: var(--primary-background);
+    border: var(--primary-border);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    cursor: var(--cursor);
+    /* prevent double-tap zoom */
+    touch-action: manipulation;
 }
-
-.calc__output {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    height: 6rem;
-    padding: 1rem;
-    margin-top: 0;
-    margin-bottom: 0;
-    overflow-x: scroll;
-    font-family: var(--folio-font-monospace);
-    font-variant-ligatures: none;
-    background-color: var(--background-primary);
-    border: 1px solid var(--border-primary);
+.calculator__button:hover {
+    background-color: var(--primary-background-hover);
 }
-
-.calc__output--input {
-    height: 3rem;
-    padding: 0.75rem;
-    font-size: var(--folio-body-font-size);
+.calculator__button:active {
+    background-color: var(--primary-background-active);
 }
-
-.calc__button {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    font-size: var(--folio-body-font-size);
-    border: 1px solid var(--border-primary);
-    background-color: var(--background-primary);
-    box-shadow: var(--folio-box-shadow);
-    cursor: pointer;
+.calculator__button--secondary {
+    background-color: var(--secondary-background);
+    border: var(--secondary-border);
 }
-
-.calc__button:hover {
-    background-color: var(--background-primary-hover);
+.calculator__button--secondary:hover {
+    background-color: var(--secondary-background-hover);
 }
-
-.calc__button:active {
-    background-color: var(--background-primary-active);
+.calculator__button--secondary:active {
+    background-color: var(--secondary-background-active);
 }
-.calc__button--secondary {
-    background-color: var(--background-secondary);
-    border-color: var(--border-secondary);
+.calculator__button--tertiary {
+    background-color: var(--tertiary-background);
+    border: var(--tertiary-border);
 }
-.calc__button--secondary:hover {
-    background-color: var(--background-secondary-hover);
+.calculator__button--tertiary:hover {
+    background-color: var(--tertiary-background-hover);
 }
-.calc__button--secondary:active {
-    background-color: var(--background-secondary-active);
+.calculator__button--tertiary:active {
+    background-color: var(--tertiary-background-active);
 }
-.calc__button--tertiary {
-    background-color: var(--background-tertiary);
-    border-color: var(--border-tertiary);
+.calculator__button--lg {
+    grid-column: span 2;
 }
-.calc__button--tertiary:hover {
-    background-color: var(--background-tertiary-hover);
-}
-.calc__button--tertiary:active {
-    background-color: var(--background-tertiary-active);
-}
-
-.calc__button--lg {
-    grid-column: span 2 / span 2;
-}
-
-.font-extrabold {
-    font-weight: 800;
+.calculator__button--bold {
+    font-weight: var(--font-weight-bold);
 }
