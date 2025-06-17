@@ -1,11 +1,12 @@
 import constants from "./modules/constants.js";
-import { format, parse } from "./modules/parser.js";
-import utils from "./modules/utils.js";
+import parse from "./modules/parser.js";
+import tools from "./modules/tools.js";
 
 // === CALCULATOR: components ===
-const calculator = document.querySelector("[data-calculator]");
-const output = calculator.querySelector("[data-calculator-output]");
-const input = calculator.querySelector("[data-calculator-input]");
+const calculator = document.querySelector("[data-calculator='app']");
+const output = calculator.querySelector("[data-calculator='output']");
+const input = calculator.querySelector("[data-calculator='input']");
+
 const cursor = "|";
 // Programmatically set cursor to show JavaScript is active.
 input.textContent = cursor;
@@ -21,8 +22,12 @@ const stack = (function () {
         state.push(...xs);
         return methods;
     };
-    methods.drop = function () {
-        state.pop();
+    methods.drop = function (x = 1) {
+        let count = x;
+        while (count > 0) {
+            state.pop();
+            count -= 1;
+        }
         return methods;
     };
     methods.clear = function () {
@@ -39,38 +44,42 @@ const stack = (function () {
 
 function delegate(key, stack) {
     // === digits ===
-    if (utils.is_digit(key)) {
-        input.textContent = stack.drop().push(key, cursor).print();
+    if (tools.is_digit(key)) {
+        stack.drop().push(key, cursor);
+        input.textContent = stack.print();
         // === operators ===
-    } else if (utils.is_operator(key)) {
-        input.textContent = stack.drop().push(key, cursor).print();
+    } else if (tools.is_operator(key)) {
+        stack.drop().push(key, cursor);
+        input.textContent = stack.print();
         // === parentheses ===
-    } else if (utils.is_paren(key)) {
-        input.textContent = stack.drop().push(key, cursor).print();
+    } else if (tools.is_paren(key)) {
+        stack.drop().push(key, cursor);
+        input.textContent = stack.print();
         // === decimal point ===
     } else if (key === constants.DECIMAL_POINT) {
-        input.textContent = stack.drop().push(key, cursor).print();
+        stack.drop().push(key, cursor);
+        input.textContent = stack.print();
         // === space ===
     } else if (key === constants.SPACE) {
-        input.textContent = stack
-            .drop()
-            .push(constants.WHITE_SPACE, cursor)
-            .print();
+        stack.drop().push(constants.WHITE_SPACE, cursor);
+        input.textContent = stack.print();
         // === delete ===
     } else if (key === constants.DELETE) {
         if (stack.is_empty()) {
             return;
         }
-        input.textContent = stack.drop().drop().push(cursor).print();
+        stack.drop(2).push(cursor);
+        input.textContent = stack.print();
         // === clear ===
     } else if (key === constants.CLEAR) {
         if (!stack.is_empty()) {
-            input.textContent = stack.clear().push(cursor).print();
+            stack.clear().push(cursor);
+            input.textContent = stack.print();
         }
         // === equal ===
     } else if (key === constants.EQUAL) {
         const text = stack.drop().print();
-        const [success, failure] = format(parse, text);
+        const [success, failure] = parse(text);
         // "innerText" preserves formatting.
         if (success !== null) {
             input.textContent = stack
@@ -102,7 +111,7 @@ calculator.addEventListener("keydown", function (event) {
         event.preventDefault();
     }
     if (!event.repeat) {
-        const key = utils.key_map[event.key];
+        const key = tools.key_map[event.key];
         if (key !== undefined) {
             delegate(key, stack);
         }
